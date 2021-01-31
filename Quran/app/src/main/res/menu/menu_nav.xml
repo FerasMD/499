@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/das"
+        android:title="Khatam"
+        android:icon="@drawable/ic_baseline_bookmark_24"/>
+
+    <item
+        android:id="@+id/home"
+        android:title="Read Quran"
+        android:icon="@drawable/ic_baseline_menu_book_24"/>
+
+    <item
+        android:id="@+id/about"
+        android:title="Settings"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+
+</menu>
