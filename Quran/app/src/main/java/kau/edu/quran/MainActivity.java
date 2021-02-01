@@ -50,7 +50,6 @@ private TextView txt;
                 switch (item.getItemId()){
                     case R.id.home:
 
-                        
                         return true;
                     case R.id.das:
 
@@ -211,6 +210,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
+        String aya="";
         for (int itr = 0; itr < nodeList.getLength(); itr++)
         {
             Node node = nodeList.item(itr);
@@ -222,11 +222,14 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 if (eElement.getElementsByTagName("sora_name_en").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
                     System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+                    aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                 }
-
 
             }
         }
+        Intent intent=new Intent(getApplicationContext(),dis.class);
+        intent.putExtra("aya",aya);
+        startActivity(intent);
 
     }
 });
