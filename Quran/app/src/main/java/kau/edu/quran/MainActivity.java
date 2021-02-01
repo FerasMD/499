@@ -142,7 +142,7 @@ printPlayers(sourahs);
     }
     private void printPlayers(ArrayList<Sourah> sourahs) throws IOException, SAXException, ParserConfigurationException {
         StringBuilder builder =new StringBuilder();
-       ListView listView=(ListView)findViewById(R.id.lis) ;
+
 
         ArrayList<String>s=new ArrayList<>();
         for (Sourah sourah:sourahs){
@@ -154,8 +154,8 @@ if (!s.contains(sourah.name)) {
 
 }
         }
-        ArrayAdapter   myAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,s);
-        listView.setAdapter(myAdapter);
+        ListView listView=(ListView)findViewById(R.id.listview) ;
+        listView.setAdapter(new list(this, R.layout.list, s));
 
 
         InputStream is = getAssets().open("hafs_v14.xml");
