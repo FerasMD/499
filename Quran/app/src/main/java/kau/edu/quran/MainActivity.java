@@ -266,6 +266,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
         String aya="";
         int ii=1;
+        ArrayList<String>ayas=new ArrayList<>();
         for (int itr = 0; itr < nodeList.getLength(); itr++)
         {
             Node node = nodeList.item(itr);
@@ -278,15 +279,16 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 if (eElement.getElementsByTagName("sora_name_en").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
 
                     System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
-                    aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
-                    System.out.println(aya);
+                    ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ");
+                  //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
+                    //System.out.println(aya);
                     ii++;
                 }
 
             }
         }
         Intent intent=new Intent(getApplicationContext(),dis.class);
-        intent.putExtra("aya",aya);
+        intent.putExtra("aya",ayas);
         startActivity(intent);
 
     }
