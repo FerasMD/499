@@ -27,7 +27,9 @@ public class dis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dis);
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
-
+String sname=getIntent().getStringExtra("sname");
+        TextView textView1=(TextView)findViewById(R.id.textView6);
+        textView1.setText(sname);
         String ve="";
         for (int i=0;i<aya.size();i++){
 
@@ -46,6 +48,7 @@ public class dis extends AppCompatActivity {
 
         ClickableSpan [] clickableSpan = new ClickableSpan[ss.length];
         for (int i=0;i<clickableSpan.length;i++){
+
             System.out.println("clickable span: "+i);
             int finalI = i;
             clickableSpan[i]= new ClickableSpan() {
@@ -79,10 +82,16 @@ public class dis extends AppCompatActivity {
         */
 
         TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
 for (int i=0;i<ss.length;i++){
     System.out.println("ss len"+i);
     System.out.println("ss i:"+ss[i]);
-    ss[i].setSpan(clickableSpan[i], ss[i].length()-2, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    try {
+        ss[i].setSpan(clickableSpan[i], ss[i].length()-3, ss[i].length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }catch (Exception e ){
+        ss[i].setSpan(clickableSpan[i], ss[i].length()-2, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
     textView.append(ss[i]);
 
 }

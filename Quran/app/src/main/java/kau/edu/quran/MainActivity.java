@@ -267,6 +267,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         String aya="";
         int ii=1;
         ArrayList<String>ayas=new ArrayList<>();
+        String sname="";
         for (int itr = 0; itr < nodeList.getLength(); itr++)
         {
             Node node = nodeList.item(itr);
@@ -277,7 +278,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 Element eElement = (Element) node;
 
                 if (eElement.getElementsByTagName("sora_name_en").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
-
+sname=names.get(i);
                     System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                     ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ");
                   //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
@@ -289,6 +290,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         }
         Intent intent=new Intent(getApplicationContext(),dis.class);
         intent.putExtra("aya",ayas);
+        intent.putExtra("sname",sname);
         startActivity(intent);
 
     }
