@@ -278,7 +278,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 Element eElement = (Element) node;
 
                 if (eElement.getElementsByTagName("sora_name_en").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
-sname=names.get(i);
+sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
                     System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                     ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ");
                   //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";

@@ -1,11 +1,13 @@
 package kau.edu.quran;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,6 +17,8 @@ import android.text.style.ClickableSpan;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +30,24 @@ public class dis extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dis);
+     //   ActionBar actionBar=(ActionBar)findViewById()
+        View view=(View)findViewById(R.id.myV);
+Drawable drawable=view.getBackground();
+        Switch aSwitch=(Switch) findViewById(R.id.switch1);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b==true){
+                    view.setBackgroundColor(R.color.black);
+                }else{
+                    view.setBackground(drawable);
+                }
+            }
+        });
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
 String sname=getIntent().getStringExtra("sname");
+     ActionBar actionBar=   getSupportActionBar();
+     actionBar.hide();
         TextView textView1=(TextView)findViewById(R.id.textView6);
         textView1.setText(sname);
         String ve="";
