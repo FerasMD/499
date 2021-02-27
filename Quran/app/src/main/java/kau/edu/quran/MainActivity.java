@@ -28,6 +28,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -174,7 +175,7 @@ private TextView txt;
                         }
 
 
-                         if ("sora_name_en".equals(eltname)){
+                         if ("sora_name_ar".equals(eltname)){
 
     sourah.name=parser.nextText();
 
@@ -218,10 +219,10 @@ if (!s.contains(sourah.name)) {
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.parse(is);
         doc.getDocumentElement().normalize();
-        System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+       // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
         NodeList nodeList = doc.getElementsByTagName("ROW");
-        System.out.println(nodeList.getLength());
+       // System.out.println(nodeList.getLength());
 // nodeList is not iterable, so we are using for loop
         ArrayList<String>names=new ArrayList<>();
 
@@ -236,9 +237,9 @@ if (!s.contains(sourah.name)) {
                 if (!eElement.getElementsByTagName("id").item(0).getTextContent().equalsIgnoreCase("115")) {
 
 
-                    if (!names.contains(eElement.getElementsByTagName("sora_name_en").item(0).getTextContent())) {
+                    if (!names.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())) {
                         //System.out.println(names.size());
-                        names.add(eElement.getElementsByTagName("sora_name_en").item(0).getTextContent());
+                        names.add(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
                     }
 
                     // System.exit(0);
@@ -265,7 +266,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
         String aya="";
-        int ii=1;
+        int ii=0;
         ArrayList<String>ayas=new ArrayList<>();
         String sname="";
         for (int itr = 0; itr < nodeList.getLength(); itr++)
@@ -277,20 +278,24 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             {
                 Element eElement = (Element) node;
 
-                if (eElement.getElementsByTagName("sora_name_en").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
+                if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
+                    ii++;
 sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                    System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+                  //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                     ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ");
                   //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                     //System.out.println(aya);
-                    ii++;
+
                 }
 
             }
         }
+
+        System.out.println(ii);
         Intent intent=new Intent(getApplicationContext(),dis.class);
         intent.putExtra("aya",ayas);
         intent.putExtra("sname",sname);
+
         startActivity(intent);
 
     }

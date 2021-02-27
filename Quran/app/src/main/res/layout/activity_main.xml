@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/qq"
+    android:background="@drawable/irb"
     tools:context=".MainActivity">
 
 
@@ -34,10 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="26dp"
-        android:text="Sourah"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="31dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Details"
         android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -46,19 +48,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="303dp"
-        android:layout_marginTop="25dp"
-        android:text="Details"
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Sourah"
         android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="51dp"
+        android:layout_height="37dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="149dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
         android:text="Button" />
 
 

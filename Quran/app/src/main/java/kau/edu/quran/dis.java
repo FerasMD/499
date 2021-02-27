@@ -62,14 +62,14 @@ String sname=getIntent().getStringExtra("sname");
 */
         SpannableString [] ss = new SpannableString[aya.size()];
         for (int i=0;i<aya.size();i++){
-            System.out.println(i);
+         //   System.out.println(i);
             ss[i]= SpannableString.valueOf(aya.get(i));
         }
 
         ClickableSpan [] clickableSpan = new ClickableSpan[ss.length];
         for (int i=0;i<clickableSpan.length;i++){
 
-            System.out.println("clickable span: "+i);
+          //  System.out.println("clickable span: "+i);
             int finalI = i;
             clickableSpan[i]= new ClickableSpan() {
                 @SuppressLint("ResourceType")
@@ -104,8 +104,8 @@ String sname=getIntent().getStringExtra("sname");
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
 for (int i=0;i<ss.length;i++){
-    System.out.println("ss len"+i);
-    System.out.println("ss i:"+ss[i]);
+    //System.out.println("ss len"+i);
+  //  System.out.println("ss i:"+ss[i]);
     try {
         ss[i].setSpan(clickableSpan[i], ss[i].length()-3, ss[i].length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }catch (Exception e ){

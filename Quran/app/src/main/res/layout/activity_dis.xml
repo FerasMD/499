@@ -7,19 +7,37 @@
 android:id="@+id/myV"
     tools:context=".dis">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="338dp"
-        android:layout_height="541dp"
-        android:scrollbars="vertical"
 
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="32sp"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="329dp"
+        android:layout_height="445dp"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.415">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="5dp"
+            android:scrollbars="vertical"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/button"
