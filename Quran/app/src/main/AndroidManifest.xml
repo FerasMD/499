@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quran">
-        <activity android:name=".Sourah_info"></activity>
+        <activity android:name=".Sourah_info" />
         <activity android:name=".trying" />
         <activity android:name=".dis" />
         <activity android:name=".Settings" />

@@ -2,6 +2,7 @@ package kau.edu.quran;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,8 @@ public class list extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
 
-                String place="";
+                String place="", ver="",wrd="",let="";
+
                // Toast.makeText(getContext(), finalMainViewholder.title.getText(), Toast.LENGTH_SHORT).show();
 
                 InputStream is = null;
@@ -92,6 +94,9 @@ public class list extends ArrayAdapter<String> {
                             sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
                             //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                              place =eElement.getElementsByTagName("place").item(0).getTextContent()+" ";
+                            ver =eElement.getElementsByTagName("ayas").item(0).getTextContent()+" ";
+                            wrd =eElement.getElementsByTagName("words").item(0).getTextContent()+" ";
+                            let =eElement.getElementsByTagName("letters").item(0).getTextContent()+" ";
                             ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
                             //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                             //System.out.println(aya);
@@ -101,13 +106,16 @@ public class list extends ArrayAdapter<String> {
                 }
 
 
-
+String About="Number of verse: "+ver+"\n"+"Number of words: "+wrd+"\n"+"Number of letters: "+let+"\n"+"Place of decent: "+place;
                 Toast.makeText(getContext(), place, Toast.LENGTH_SHORT).show();
+               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",About));
             }
 
 
         });
         mainViewholder.title.setText(getItem(position));
+
+
 
         return convertView;
     }
