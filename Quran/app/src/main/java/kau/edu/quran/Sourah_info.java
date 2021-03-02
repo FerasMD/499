@@ -18,7 +18,7 @@ public class Sourah_info extends AppCompatActivity {
 
      ExpandableTextView expandableTextView= findViewById(R.id.ex);
         //TabItem tabItem=(TabItem)findViewById(R.id.mon);
-        expandableTextView.setText(getIntent().getStringExtra("about"));
+        expandableTextView.setText(getIntent().getStringExtra("about")+"                                       ");
 
 
         ExpandableTextView expandableTextView1= findViewById(R.id.ex1);

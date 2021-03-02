@@ -1,132 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sourah_info"
+    android:background="@drawable/is"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".Sourah_info">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/design_default_color_surface"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tet"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About"></TextView>
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            android:layout_below="@+id/tet"
-            android:id="@+id/ex"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            expandableTextView:animDuration="1000"
-            expandableTextView:maxCollapsedLines="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-  >
-            <TextView
-                android:id="@+id/expandable_text"
-                android:textColor="#ff33"
-                android:textSize="18dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-<ImageButton
-    android:id="@+id/expand_collapse"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="right"
-
-    />
-
-
-
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-
-<TextView
-    android:layout_below="@+id/ex"
-    android:id="@+id/tete"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-
-    android:text="Reason of decent"
->
-
-
-
-
-</TextView>
-
-
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            android:id="@+id/ex1"
-
-            android:layout_below="@+id/tete"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            expandableTextView:animDuration="1000"
-            expandableTextView:maxCollapsedLines="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-            <TextView
-                android:id="@+id/expandable_text"
-                android:textColor="#ff33"
-                android:textSize="18dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="DuplicateIds" />
-            <ImageButton
-                android:id="@+id/expand_collapse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-
-                tools:ignore="DuplicateIds" />
-
-
-
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-            <TextView
-                android:layout_below="@+id/ex1"
-                android:id="@+id/tetet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="The purpose of the name"
+                android:background="#E8E0E0"
+                android:text="About"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"
                 >
+
+
+
+
+
+
+
+            </TextView>
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tet"
+                expandableTextView:animDuration="1000"
+                expandableTextView:maxCollapsedLines="2">
+
+                <TextView
+                    android:id="@+id/expandable_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <ImageButton
+                    android:id="@+id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+
+                    />
+
+
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+            <TextView
+                android:id="@+id/tete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ex"
+                android:background="#E8E0E0"
+
+                android:text="Reason of decent"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold">
+
+
             </TextView>
 
 
-            <com.ms.square.android.expandabletextview.ExpandableTextView
-                android:id="@+id/ex2"
+            <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
 
-                android:layout_below="@+id/tetet"
-                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-                expandableTextView:animDuration="1000"
-                expandableTextView:maxCollapsedLines="0"
+                android:id="@+id/ex1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                >
+                android:layout_below="@+id/tete"
+                expandableTextView:animDuration="1000"
+                expandableTextView:maxCollapsedLines="2">
+
                 <TextView
                     android:id="@+id/expandable_text"
-                    android:textColor="#ff33"
-                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
                     tools:ignore="DuplicateIds" />
+
                 <ImageButton
                     android:id="@+id/expand_collapse"
                     android:layout_width="wrap_content"
@@ -136,6 +116,46 @@
                     tools:ignore="DuplicateIds" />
 
 
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+            <TextView
+                android:id="@+id/tetet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ex1"
+                android:background="#E8E0E0"
+                android:text="The purpose of the name"
+
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"></TextView>
+
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+
+                android:id="@+id/ex2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tetet"
+                expandableTextView:animDuration="1000"
+                expandableTextView:maxCollapsedLines="2">
+
+                <TextView
+                    android:id="@+id/expandable_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    tools:ignore="DuplicateIds" />
+
+                <ImageButton
+                    android:id="@+id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+                    tools:ignore="DuplicateIds" />
+
 
             </com.ms.square.android.expandabletextview.ExpandableTextView>
 
@@ -143,8 +163,4 @@
     </ScrollView>
 
 
-
-
-
-
-    </LinearLayout>
+</LinearLayout>
