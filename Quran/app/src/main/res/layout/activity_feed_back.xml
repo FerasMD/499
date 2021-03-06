@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".FeedBack">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edit_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ahmed5163@gmail.com"
+        android:inputType="textEmailAddress"
+        ></EditText>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subject"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edit_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="textEmailSubject"
+        ></EditText>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Message:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/edit_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="8"
+        android:gravity="start|top"
+        ></EditText>
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="send"
+
+        ></Button>
+
+
+</LinearLayout>

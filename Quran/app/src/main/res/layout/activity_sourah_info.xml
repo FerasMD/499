@@ -32,10 +32,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E8E0E0"
-                android:text="About"
+                android:text="تفاصيل السورة"
                 android:textColor="@color/black"
                 android:textSize="24dp"
                 android:textStyle="bold"
+                android:textAlignment="gravity"
                 >
 
 
@@ -52,20 +53,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tet"
                 expandableTextView:animDuration="1000"
-                expandableTextView:maxCollapsedLines="2">
+                expandableTextView:maxCollapsedLines="2"
+                >
 
                 <TextView
                     android:id="@+id/expandable_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"/>
 
                 <ImageButton
                     android:id="@+id/expand_collapse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="left"
 
 
                     />
@@ -81,10 +83,11 @@
                 android:layout_below="@+id/ex"
                 android:background="#E8E0E0"
 
-                android:text="Reason of decent"
+                android:text="سبب النزول"
                 android:textColor="@color/black"
                 android:textSize="24dp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                android:textAlignment="gravity">
 
 
             </TextView>
@@ -111,7 +114,7 @@
                     android:id="@+id/expand_collapse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="left"
 
                     tools:ignore="DuplicateIds" />
 
@@ -124,11 +127,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ex1"
                 android:background="#E8E0E0"
-                android:text="The purpose of the name"
+                android:text="سبب التسمية"
 
                 android:textColor="@color/black"
                 android:textSize="24dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:textAlignment="gravity"></TextView>
 
 
             <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
@@ -152,7 +156,7 @@
                     android:id="@+id/expand_collapse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="left"
 
                     tools:ignore="DuplicateIds" />
 

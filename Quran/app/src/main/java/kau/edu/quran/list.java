@@ -105,9 +105,9 @@ public class list extends ArrayAdapter<String> {
                     }
                 }
 
-
-String About="Number of verse: "+ver+"\n"+"Number of words: "+wrd+"\n"+"Number of letters: "+let+"\n"+"Place of decent: "+place;
+                String About="عدد الآيات:"+ver+"\n"+"عدد الكلمات:"+wrd+"\n"+"عدد الحروف:"+let+"\n"+"مكان النزول:"+place;
                 Toast.makeText(getContext(), place, Toast.LENGTH_SHORT).show();
+
                getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",About));
             }
 
