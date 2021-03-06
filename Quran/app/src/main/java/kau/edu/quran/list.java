@@ -1,11 +1,13 @@
 package kau.edu.quran;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class list extends ArrayAdapter<String> {
         mObjects = objects;
         layout = resource;
     }
+    @SuppressLint("WrongViewCast")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder mainViewholder = null;
@@ -29,7 +32,7 @@ public class list extends ArrayAdapter<String> {
             convertView = inflater.inflate(layout, parent, false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.list_item_text);
-            viewHolder.button = (Button) convertView.findViewById(R.id.list_item_btn);
+            viewHolder.button = (ImageButton) convertView.findViewById(R.id.list_item_btn);
             convertView.setTag(viewHolder);
         }
         mainViewholder = (ViewHolder) convertView.getTag();
@@ -47,7 +50,8 @@ public class list extends ArrayAdapter<String> {
 class ViewHolder {
 
     TextView title;
-    Button button;
+
+    ImageButton button;
 }
 
 
