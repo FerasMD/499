@@ -3,4 +3,8 @@
     <string name="title_activity_uig">uig</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+    <string name="display">1</string>
 </resources>

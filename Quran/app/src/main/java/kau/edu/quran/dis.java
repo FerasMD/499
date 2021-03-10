@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -30,26 +33,49 @@ public class dis extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dis);
-     //   ActionBar actionBar=(ActionBar)findViewById()
+
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        String back=sharedPreferences.getString("back","No");
         View view=(View)findViewById(R.id.myV);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView1=(TextView)findViewById(R.id.textView6);
+if (back.equalsIgnoreCase("black")){
+    view.setBackgroundColor(Color.BLACK);
+    textView.setTextColor(Color.WHITE);
+    textView1.setTextColor(Color.WHITE);
+}
+        int size=Integer.parseInt(sharedPreferences.getString("size","28"));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
+        System.out.println(size+"   "+back);
+     //   ActionBar actionBar=(ActionBar)findViewById()
+
+        textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
+        ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
+        String sname=getIntent().getStringExtra("sname");
+        ActionBar actionBar=   getSupportActionBar();
+        actionBar.hide();
+
+        textView1.setText(sname);
+       // ColorStateList col=textView.getTextColors();
+
 Drawable drawable=view.getBackground();
         Switch aSwitch=(Switch) findViewById(R.id.switch1);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b==true){
-                    view.setBackgroundColor(R.color.black);
+                    view.setBackgroundColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
+                    textView1.setTextColor(Color.WHITE);
                 }else{
+                    textView.setTextColor(Color.BLACK);
+                    textView1.setTextColor(Color.BLACK);
                     view.setBackground(drawable);
                 }
             }
         });
-        ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
-String sname=getIntent().getStringExtra("sname");
-     ActionBar actionBar=   getSupportActionBar();
-     actionBar.hide();
-        TextView textView1=(TextView)findViewById(R.id.textView6);
-        textView1.setText(sname);
+
         String ve="";
         for (int i=0;i<aya.size();i++){
 
@@ -101,8 +127,7 @@ String sname=getIntent().getStringExtra("sname");
         };
         */
 
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
+
 for (int i=0;i<ss.length;i++){
     //System.out.println("ss len"+i);
   //  System.out.println("ss i:"+ss[i]);
