@@ -33,13 +33,16 @@ public class dis extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dis);
+        View view=(View)findViewById(R.id.myV);
 
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        Switch aSwitch=(Switch) findViewById(R.id.switch1);
         String back=sharedPreferences.getString("back","No");
-        View view=(View)findViewById(R.id.myV);
+
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView1=(TextView)findViewById(R.id.textView6);
 if (back.equalsIgnoreCase("black")){
+    aSwitch.setChecked(true);
     view.setBackgroundColor(Color.BLACK);
     textView.setTextColor(Color.WHITE);
     textView1.setTextColor(Color.WHITE);
@@ -59,7 +62,7 @@ if (back.equalsIgnoreCase("black")){
        // ColorStateList col=textView.getTextColors();
 
 Drawable drawable=view.getBackground();
-        Switch aSwitch=(Switch) findViewById(R.id.switch1);
+
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -71,7 +74,7 @@ Drawable drawable=view.getBackground();
                 }else{
                     textView.setTextColor(Color.BLACK);
                     textView1.setTextColor(Color.BLACK);
-                    view.setBackground(drawable);
+                    view.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
             }
         });

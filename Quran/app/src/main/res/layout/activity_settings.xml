@@ -6,26 +6,21 @@
     android:layout_height="match_parent"
 
 
-
+    android:background="@drawable/irb"
     tools:context=".Settings">
 
 
-
-
-
-
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bot"
 
-        app:itemTextColor="@drawable/selector"
+        android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_nav"
-        android:layout_alignParentBottom="true"/>
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_nav">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <Switch
         android:id="@+id/switch1"
@@ -41,18 +36,6 @@
         android:text="الخلفية"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/feed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginBottom="74dp"
-        android:text="Send your Feedback" />
-
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
@@ -62,8 +45,8 @@
         android:layout_marginTop="109dp"
         android:gravity="center_horizontal"
         android:scrollbars="vertical"
-        android:textColor="@color/black"
         android:text="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
 
@@ -84,7 +67,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="22dp"
         android:layout_marginTop="48dp"
-        android:text="حجم الخط" />
+        android:background="#FFFFFF"
+        android:text="حجم الخط"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/button4"
@@ -94,6 +80,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp"
         android:text="Save" />
+
+    <Button
+
+        android:id="@+id/feed"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp"
+        android:text="Send your Feedback" />
 
 
 </RelativeLayout>
