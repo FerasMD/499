@@ -60,52 +60,20 @@ Boolean sw=false;
                 return false;
             }
         });
+
+
         NumberPicker numberPicker = (NumberPicker) findViewById(R.id.number_picker_default);
         Switch aSwitch=(Switch) findViewById(R.id.switch1);
         TextView textView=findViewById(R.id.textView5);
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(c);
-        String back =sharedPreferences.getString("back","white");
-        if (back.equalsIgnoreCase("black")){
-aSwitch.setChecked(true);
-            textView.setBackgroundResource(R.color.black);
-            textView.setTextColor(Color.WHITE);
-        }
-        String Size=sharedPreferences.getString("size","28");
 
-        int si=Integer.parseInt(Size);
-
-
-        numberPicker.setMax(80);
-        numberPicker.setMin(18);
-        numberPicker.setUnit(2);
-        numberPicker.setValue(si);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,si);
+        ChangeTheme(textView, aSwitch,  sharedPreferences);
+        changeTextSize(textView,numberPicker,sharedPreferences);
 
 textView.setMovementMethod(new ScrollingMovementMethod());
 
-        numberPicker.setValueChangedListener(new ValueChangedListener() {
-            @Override
-            public void valueChanged(int value, ActionEnum action) {
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,value);
-                System.out.println(value);
-            }
-        });
 
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b==true){
-                    sw=true;
-                    textView.setBackgroundResource(R.color.black);
-                    textView.setTextColor(Color.WHITE);
-                }else {
-                    sw=false;
-                    textView.setBackgroundResource(R.color.white);
-                    textView.setTextColor(Color.BLACK);
-                }
-            }
-        });
+
 
         Button button=findViewById(R.id.feed);
         button.setOnClickListener(new View.OnClickListener() {
@@ -120,14 +88,16 @@ textView.setMovementMethod(new ScrollingMovementMethod());
             public void onClick(View view) {
                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(c);
                SharedPreferences.Editor editor=sharedPreferences.edit();
-               if (sw==true) {
+               if (aSwitch.isChecked()) {
                    editor.putString("back", "black");
-
+                   editor.putString("size",numberPicker.getValue()+"");
+                   editor.commit();
                }else{
                    editor.putString("back", "white");
+                   editor.putString("size",numberPicker.getValue()+"");
+                   editor.commit();
                }
-               editor.putString("size",numberPicker.getValue()+"");
-editor.commit();
+
             }
         });
 
@@ -135,4 +105,59 @@ editor.commit();
        // System.out.println(sharedPreferences.getString("back","NO"));
 
     }
+
+
+   public void ChangeTheme(TextView textView,Switch aSwitch, SharedPreferences sharedPreferences){
+
+       String back =sharedPreferences.getString("back","white");
+       if (back.equalsIgnoreCase("black")){
+aSwitch.setChecked(true);
+            textView.setBackgroundResource(R.color.black);
+            textView.setTextColor(Color.WHITE);
+        }
+       aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @SuppressLint("ResourceType")
+           @Override
+           public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+               if (b==true){
+                   sw=true;
+                   textView.setBackgroundResource(R.color.black);
+                   textView.setTextColor(Color.WHITE);
+               }else {
+                   sw=false;
+                   textView.setBackgroundResource(R.color.white);
+                   textView.setTextColor(Color.BLACK);
+               }
+           }
+       });
+
+
+
+
+   }
+
+
+    public void changeTextSize( TextView textView,NumberPicker numberPicker, SharedPreferences sharedPreferences){
+        String Size=sharedPreferences.getString("size","28");
+
+        int si=Integer.parseInt(Size);
+
+
+        numberPicker.setMax(80);
+        numberPicker.setMin(18);
+        numberPicker.setUnit(2);
+        numberPicker.setValue(si);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,si);
+        numberPicker.setValueChangedListener(new ValueChangedListener() {
+            @Override
+            public void valueChanged(int value, ActionEnum action) {
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,value);
+                System.out.println(value);
+            }
+        });
+
+
+    }
+
+
 }

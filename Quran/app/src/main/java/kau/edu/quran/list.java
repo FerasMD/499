@@ -82,8 +82,9 @@ public class list extends ArrayAdapter<String> {
                     e.printStackTrace();
                 }
                 NodeList nodeList = doc.getElementsByTagName("ROW");
-                ArrayList<String> ayas = new ArrayList<>();
+              //  ArrayList<String> ayas = new ArrayList<>();
                 String sname = "";
+                /*
                 for (int itr = 0; itr < nodeList.getLength(); itr++) {
                     Node node = nodeList.item(itr);
 //System.out.println("\nNode Name :" + node.getNodeName());
@@ -97,7 +98,7 @@ public class list extends ArrayAdapter<String> {
                             ver =eElement.getElementsByTagName("ayas").item(0).getTextContent()+" ";
                             wrd =eElement.getElementsByTagName("words").item(0).getTextContent()+" ";
                             let =eElement.getElementsByTagName("letters").item(0).getTextContent()+" ";
-                            ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
+                            //ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
                             //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                             //System.out.println(aya);
 
@@ -105,10 +106,19 @@ public class list extends ArrayAdapter<String> {
                     }
                 }
 
+
+
                 String About="عدد الآيات:"+ver+"\n"+"عدد الكلمات:"+wrd+"\n"+"عدد الحروف:"+let+"\n"+"مكان النزول:"+place;
+
+               */
+
+                Sourah s = new Sourah();
+                sname=(String)finalMainViewholder.title.getText();
+                String about=s.displayDetails(nodeList,sname);
+
                 Toast.makeText(getContext(), place, Toast.LENGTH_SHORT).show();
 
-               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",About));
+               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",about));
             }
 
 

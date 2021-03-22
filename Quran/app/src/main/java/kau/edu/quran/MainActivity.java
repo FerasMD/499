@@ -3,6 +3,7 @@ package kau.edu.quran;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -38,7 +39,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
 private TextView txt;
-DB db = new DB(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,165 +78,54 @@ DB db = new DB(this);
             }
         });
        // txt=(TextView)findViewById(R.id.txt);
+
+        InputStream is = null;
         try {
-            parseXML();
+            is = getAssets().open("hafs_v14.xml");
+            // System.out.println();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//an instance of factory that gives a document builder
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//an instance of builder to parse the specified xml file
+        DocumentBuilder db = null;
+        try {
+            db = dbf.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document doc = null;
+        try {
+            doc = db.parse(is);
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         }
-
-    }
-   /* private void parseXML() throws ParserConfigurationException, SAXException, IOException {
-        InputStream is = getAssets().open("hafs_v14.xml");
-//an instance of factory that gives a document builder
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(is);
         doc.getDocumentElement().normalize();
-        System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-
         NodeList nodeList = doc.getElementsByTagName("ROW");
-        System.out.println(nodeList.getLength());
+        /*
+        // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+
+
+        // System.out.println(nodeList.getLength());
+
+
+        System.out.println("node list is+ "+nodeList.getLength());
 // nodeList is not iterable, so we are using for loop
-        ArrayList<String>names=new ArrayList<>();
+        ArrayList<String> names=new ArrayList<>();
         for (int itr = 0; itr < nodeList.getLength(); itr++)
         {
+
+
             Node node = nodeList.item(itr);
 //System.out.println("\nNode Name :" + node.getNodeName());
 
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
                 Element eElement = (Element) node;
-                if (!eElement.getElementsByTagName("id").item(0).getTextContent().equalsIgnoreCase("115")) {
 
-
-                    if (!names.contains(eElement.getElementsByTagName("sora_name_en").item(0).getTextContent())) {
-                        //System.out.println(names.size());
-                        names.add(eElement.getElementsByTagName("sora_name_en").item(0).getTextContent());
-                    }
-
-                    // System.exit(0);
-                }
-
-//System.out.println("First Name: "+ eElement.getElementsByTagName("firstname").item(0).getTextContent());
-//System.out.println("Last Name: "+ eElement.getElementsByTagName("lastname").item(0).getTextContent());
-//System.out.println("Subject: "+ eElement.getElementsByTagName("subject").item(0).getTextContent());
-//System.out.println("Marks: "+ eElement.getElementsByTagName("marks").item(0).getTextContent());
-
-            }
-
-        }
-    }*/
-   private void parseXML() throws ParserConfigurationException, SAXException {
-        XmlPullParserFactory parseFactory;
-        try{
-            parseFactory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parseFactory.newPullParser();
-            InputStream is = getAssets().open("hafs_v14.xml");
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(is, null);
-            proessParsing(parser);
-        }
-        catch (XmlPullParserException e){
-        }
-        catch (IOException e){
-        }
-    }
-    public void proessParsing(XmlPullParser parser) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException {
-
-        ArrayList<Sourah> sourahs=new ArrayList<>();
-        int evenType=parser.getEventType();
-        Sourah sourah=null;
-        int i=1;
-        while (evenType!=XmlPullParser.END_DOCUMENT){
-
-            String id;
-            String eltname=null;
-            String str="";
-            switch (evenType){
-                case XmlPullParser.START_TAG:
-                    eltname=parser.getName();
-
-                    if ("ROW".equals(eltname)) {
-
-                     //   System.out.println( parser.getAttributeCount());
-                        sourah = new Sourah();
-                        sourahs.add(sourah);
-
-
-                    }
-
-                    else if(sourah!=null){
-                        if (("id".equals(eltname))){
-                            id=parser.nextText();
-                          //  System.out.println("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+parser.nextText());
-
-                           // System.out.println(id);
-                        }
-
-
-                         if ("sora_name_ar".equals(eltname)){
-
-    sourah.name=parser.nextText();
-
-                         }
-
-                        }
-
-                    break;
-
-            }
-
-            evenType=parser.next();
-        }
-
-printPlayers(sourahs);
-    }
-    private void printPlayers(ArrayList<Sourah> sourahs) throws IOException, SAXException, ParserConfigurationException {
-        StringBuilder builder =new StringBuilder();
-
-
-        ArrayList<String>s=new ArrayList<>();
-        for (Sourah sourah:sourahs){
-           // System.out.println(sourah.name);
-            builder.append(sourah.name);
-if (!s.contains(sourah.name)) {
-    s.add(sourah.name);
-
-
-}
-
-        }
-        ListView listView=(ListView)findViewById(R.id.listview) ;
-        listView.setAdapter(new list(this, R.layout.list, s));
-
-
-
-        InputStream is = getAssets().open("hafs_v14.xml");
-
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(is);
-        doc.getDocumentElement().normalize();
-       // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-
-        NodeList nodeList = doc.getElementsByTagName("ROW");
-       // System.out.println(nodeList.getLength());
-// nodeList is not iterable, so we are using for loop
-        ArrayList<String>names=new ArrayList<>();
-
-        for (int itr = 0; itr < nodeList.getLength(); itr++)
-        {
-            Node node = nodeList.item(itr);
-//System.out.println("\nNode Name :" + node.getNodeName());
-
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element eElement = (Element) node;
-                if (!eElement.getElementsByTagName("id").item(0).getTextContent().equalsIgnoreCase("115")) {
 
 
                     if (!names.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())) {
@@ -244,7 +134,7 @@ if (!s.contains(sourah.name)) {
                     }
 
                     // System.exit(0);
-                }
+
 
 //System.out.println("First Name: "+ eElement.getElementsByTagName("firstname").item(0).getTextContent());
 //System.out.println("Last Name: "+ eElement.getElementsByTagName("lastname").item(0).getTextContent());
@@ -253,14 +143,16 @@ if (!s.contains(sourah.name)) {
 
             }
 
+
+
         }
-
-
-/*for (int i=0;i<names.size();i++){
-    System.out.println("My loop"+names.get(i));
-}
 */
+User user=new User();
+ArrayList<String> names=   user.Select_Sourah(nodeList);
 
+
+      final   ListView listView=(ListView)findViewById(R.id.listview) ;
+        listView.setAdapter(new list(this, R.layout.list, names));
 
 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
@@ -301,12 +193,7 @@ sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
 
     }
 });
-
-
-
-
-
-
         //  txt.setText(builder.toString());
     }
+
 }
