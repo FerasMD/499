@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,7 +35,7 @@ public class trying extends AppCompatActivity {
         InputStream is = null;
         try {
             is = getAssets().open("hafs_v14.xml");
-           // System.out.println();
+            // System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,10 +57,10 @@ public class trying extends AppCompatActivity {
             e.printStackTrace();
         }
         doc.getDocumentElement().normalize();
-       // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+        // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
         NodeList nodeList = doc.getElementsByTagName("ROW");
-       // System.out.println(nodeList.getLength());
+        // System.out.println(nodeList.getLength());
 // nodeList is not iterable, so we are using for loop
         ArrayList<String> names=new ArrayList<>();
         for (int itr = 0; itr < nodeList.getLength(); itr++)
@@ -93,7 +94,7 @@ public class trying extends AppCompatActivity {
         for (int j = 0; j < names.size(); j++) {
             sn+="\n"+names.get(j);
 
-     //  textView.setText(j+" "+ names.get(j));
+            //  textView.setText(j+" "+ names.get(j));
 
         }
 
@@ -140,7 +141,7 @@ public class trying extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                ArrayList<String> strings =new ArrayList<>();
                 ArrayList<String>ayas=new ArrayList<>();
                 String sname="";
                 for (int itr = 0; itr < nodeList.getLength(); itr++)
@@ -151,16 +152,31 @@ public class trying extends AppCompatActivity {
                     if (node.getNodeType() == Node.ELEMENT_NODE)
                     {
                         Element eElement = (Element) node;
-int num=Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
-                        if (num<6237&&num>6200) {
+                        int num=Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
+                        if (num==241||num==242) {
 
-                            ArrayList<String>strings=new ArrayList<>();
+                          /*  ArrayList<String>strings=new ArrayList<>();
                             if (!strings.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())){
                                 strings.add(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
 
+                            }*
+
+
+                           */
+                            String sssss=eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
+
+                            if (!strings.contains(sssss)){
+                                System.out.println("aaaaaaaaaaaaaaa");
+                                ayas.add("\n\n"+sssss+"\n");
+                                strings.add(sssss);
                             }
-                            sname = (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                         //   System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+
+
+
+
+                            //   sname = (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
+
+                            //   System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
 
                             ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent() + " ");
                             //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
@@ -170,14 +186,21 @@ int num=Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextCont
 
                     }
                 }
+
+
+                for (int ii=0;ii<strings.size();ii++){
+
+                    sname+=","+strings.get(ii);
+                }
                 Intent intent=new Intent(getApplicationContext(),dis.class);
                 intent.putExtra("aya",ayas);
+                System.out.println(sname);
                 intent.putExtra("sname",sname);
                 startActivity(intent);
 
             }
         });
 
-      //  textView.setText(sn);
+        //  textView.setText(sn);
     }
 }
