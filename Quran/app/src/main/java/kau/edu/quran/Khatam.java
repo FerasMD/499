@@ -123,18 +123,24 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
         public void onClick(View view) {
             db.delete("1");
         if(db.isEmpty("khatm")){
-            if(radioButton.isChecked()){
+            if(radioButton.isChecked()) {
                 String startDate = dateFormat.format(cal.getTime());
                 String endDate = sss[0];
-                long daysDiff = getDateDiff(dateFormat,startDate,endDate);
-                int dailyPages = (int) ((int) 604/daysDiff);
-                        db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
-                        Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
-                        ArrayList<Object> attrs = db.getAllAttr();
-                        System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
-                                +" "+attrs.get(5)+" "+attrs.get(6));
-                    }
+                long daysDiff = getDateDiff(dateFormat, startDate, endDate);
+                if (daysDiff > 0) {
+                    int dailyPages = (int) ((int) 604 / daysDiff);
+                    db.insertInto1(1, dailyPages, startDate, endDate, "الفاتحة", 1, 1);
+                    Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
+                    ArrayList<Object> attrs = db.getAllAttr();
+                    System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
+                            + " " + attrs.get(5) + " " + attrs.get(6));
+                    startActivity(new Intent(getApplicationContext(),ManageKhatam.class));
+                }else{
+                    Toast.makeText(Khatam.this, "لا تستطيع اختيار نفس اليوم", Toast.LENGTH_SHORT).show();
+                }
 
+
+            }
 
                 //System.out.println(day);
 
@@ -172,6 +178,8 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
             }}  else
             Toast.makeText(Khatam.this, "You have a schedule already.", Toast.LENGTH_SHORT).show();
             //Toast.makeText(Khatam.this, "hhh", Toast.LENGTH_SHORT).show();
+
+
 
     }});
 

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/irb"
+    android:backgroundTint="#80FFFFFF"
+    android:backgroundTintMode="src_over"
+    tools:context=".ManageKhatam">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/curSo"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="31dp"
+            android:text="السورة الحالية:" />
+
+        <TextView
+            android:id="@+id/curSo2"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="277dp"
+            android:layout_marginTop="67dp"
+            android:text="الصفحة الحالية:" />
+
+        <TextView
+            android:id="@+id/curSo3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="101dp"
+            android:text="الآية الحالية:" />
+
+        <TextView
+            android:id="@+id/curSo4"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="139dp"
+            android:text="تاريخ انهاء الختمة:" />
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_below="@+id/curSo4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="16dp"
+        android:gravity="right">
+
+        <RadioButton
+            android:id="@+id/r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="اختر المدة:" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r1"
+
+
+            />
+
+        <RadioButton
+            android:id="@+id/r2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:buttonTint="#FFFFFF"
+            android:text="اختر وردك اليومي:" />
+
+
+        <NumberPicker
+            android:id="@+id/num"
+            android:layout_below="@+id/r2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_toRightOf="@+id/pa"
+            />
+
+
+    </RadioGroup>
+
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rg"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:gravity="right"
+            android:text="التذكير بالورد اليومي:" />
+
+        <TimePicker
+            android:id="@+id/timePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switch2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-1dp"
+            android:gravity="right"
+            android:timePickerMode="spinner" />
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
+
+
+
+
+</FrameLayout>
