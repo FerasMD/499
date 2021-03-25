@@ -57,13 +57,15 @@
                 android:buttonTint="#FFFFFF"
                 android:text="اختر وردك اليومي:" />
 
-            <com.travijuu.numberpicker.library.NumberPicker
+
+            <NumberPicker
                 android:id="@+id/num"
+                android:layout_below="@+id/r2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/r2"
-
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_toRightOf="@+id/pa"
+                />
 
 
         </RadioGroup>

@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CompoundButton;
-import com.travijuu.numberpicker.library.Enums.ActionEnum;
-import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
-import com.travijuu.numberpicker.library.NumberPicker;
+
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -23,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Khatam extends AppCompatActivity {
 
@@ -41,6 +41,13 @@ public class Khatam extends AppCompatActivity {
         Button b1 = findViewById(R.id.b1);
         CalendarView calendarView=findViewById(R.id.calendarView);
         NumberPicker numberPicker= (NumberPicker) findViewById(R.id.num);
+
+        numberPicker.setValue(10);
+        numberPicker.setMaxValue(200);
+        numberPicker.setMinValue(1);
+       // numberPicker.setMin(1);
+
+        //numberPicker.setMax(200);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -90,6 +97,7 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
         if (b){
             numberPicker.setVisibility(View.VISIBLE);
 
+
         }else{
             numberPicker.setVisibility(View.GONE);
         }
@@ -101,7 +109,7 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 
-                sss[0] =i+"/"+(i1+1)+"/"+i2;
+                sss[0] =i2+"/"+(i1+1)+"/"+i;
                 System.out.println(sss[0] );
             }
         });
@@ -118,7 +126,9 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
             if(radioButton.isChecked()){
                 String startDate = dateFormat.format(cal.getTime());
                 String endDate = sss[0];
-                        db.insertInto1(1,0,startDate,endDate,"الفاتحة", 1,1);
+                long daysDiff = getDateDiff(dateFormat,startDate,endDate);
+                int dailyPages = (int) ((int) 604/daysDiff);
+                        db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
                         Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
                         ArrayList<Object> attrs = db.getAllAttr();
                         System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
@@ -138,9 +148,12 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
                 int dailyPages = numberPicker.getValue();
                 String startDate = dateFormat.format(cal.getTime());
                 int daysToFinish = 604/ dailyPages;
+              Date date=  cal.getTime();
                 cal.add(Calendar.DATE, daysToFinish);
-                String endDate = dateFormat.format(cal.getTime());
 
+                String endDate = dateFormat.format(cal.getTime());
+                cal.setTime(date);
+                System.out.println(cal.getTime());
                 boolean d = db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
                 ArrayList<Object> attrs = db.getAllAttr();
                 System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
@@ -163,4 +176,16 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
     }});
 
     }
+
+
+    public static long getDateDiff(SimpleDateFormat format, String oldDate, String newDate) {
+        try {
+            return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - format.parse(oldDate).getTime(), TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
 }
