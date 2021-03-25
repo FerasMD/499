@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
@@ -17,7 +18,7 @@ public class ManageKhatam extends AppCompatActivity {
         setContentView(R.layout.activity_manage_khatam);
         CalendarView calendarView=findViewById(R.id.calendarView);
         NumberPicker numberPicker= (NumberPicker) findViewById(R.id.num);
-
+        DB db = new DB (this);
 
 
 
@@ -68,5 +69,26 @@ public class ManageKhatam extends AppCompatActivity {
                 }
             }
         });
+
+        Button button=findViewById(R.id.delete);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              int num=  db.delete("1");
+                System.out.println(num);
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
     }
 }
