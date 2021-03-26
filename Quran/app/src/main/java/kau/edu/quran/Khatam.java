@@ -20,6 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.Switch;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,6 +37,10 @@ public class Khatam extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         createNotificationChannel();
         DB db = new DB (this);
+      /*  if (!db.isEmpty("khatm")){
+      Intent intent=new Intent(getApplicationContext(),ManageKhatam.class);
+      startActivity(intent);
+        }*/
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
 
@@ -127,18 +132,22 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
     b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Switch aSwitch=findViewById(R.id.switch2);
-            Toast.makeText(Khatam.this, "Remid", Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(Khatam.this,bodRec.class);
-PendingIntent pendingIntent=PendingIntent.getBroadcast(Khatam.this,0,intent,0);
-AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
-long timeAtb =System.currentTimeMillis();
-long ten=1000*10;
-
-
-alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtb+ten,pendingIntent);
-
             db.delete("1");
+            Switch aSwitch=findViewById(R.id.switch2);
+            if (aSwitch.isChecked()) {
+                TimePicker timePicker=findViewById(R.id.timePicker1);
+                System.out.println(timePicker.getHour());
+                System.out.println(timePicker.getMinute());
+
+                System.out.println("yes");
+
+
+                sendNotification(timePicker.getHour(),timePicker.getMinute());
+              // Toast.makeText(Khatam.this, "Remid", Toast.LENGTH_SHORT).show();
+
+            }
+
+          //  db.delete("1");
         if(db.isEmpty("khatm")){
             if(radioButton.isChecked()) {
                 String startDate = dateFormat.format(cal.getTime());
@@ -228,6 +237,21 @@ alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtb+ten,pendingIntent);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+    private  void sendNotification(int hour, int minute){
+        Intent intent = new Intent(Khatam.this, bodRec.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Khatam.this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,minute);
+        // long timeAtb = System.currentTimeMillis();
+        //   long ten = 1000 * 10;
+
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+
     }
 
 }

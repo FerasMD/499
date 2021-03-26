@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DB extends SQLiteOpenHelper {
 
@@ -87,7 +86,7 @@ public class DB extends SQLiteOpenHelper {
         return attrs;
     }
 
-    public boolean update (String id, String endDate, int dailyPages, String currentSourah, int currentVerse,
+    public boolean update (String id, int endDate, String dailyPages, String currentSourah, int currentVerse,
                            int currentPage){
 
         SQLiteDatabase db = this.getWritableDatabase();
