@@ -3,7 +3,12 @@ package kau.edu.quran;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.MenuItem;
@@ -14,6 +19,7 @@ import android.widget.CompoundButton;
 
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +34,7 @@ public class Khatam extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        createNotificationChannel();
         DB db = new DB (this);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
@@ -121,6 +127,17 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
     b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Switch aSwitch=findViewById(R.id.switch2);
+            Toast.makeText(Khatam.this, "Remid", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(Khatam.this,bodRec.class);
+PendingIntent pendingIntent=PendingIntent.getBroadcast(Khatam.this,0,intent,0);
+AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
+long timeAtb =System.currentTimeMillis();
+long ten=1000*10;
+
+
+alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtb+ten,pendingIntent);
+
             db.delete("1");
         if(db.isEmpty("khatm")){
             if(radioButton.isChecked()) {
@@ -193,7 +210,24 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
             e.printStackTrace();
             return 0;
         }
-    }
 
+
+
+    }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Ahmed";
+            String description = "pleaz work";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("noti", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 }
