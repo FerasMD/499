@@ -9,29 +9,28 @@ android:id="@+id/myV"
 
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="329dp"
-        android:layout_height="445dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="324dp"
+        android:layout_height="552dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.415">
+        app:layout_constraintVertical_bias="0.184">
 
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-android:fontFamily="@font/utt"
             android:layout_marginTop="52dp"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/uc"
+            android:gravity="center_horizontal"
             android:scrollbars="vertical"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="28sp"
-            android:gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"

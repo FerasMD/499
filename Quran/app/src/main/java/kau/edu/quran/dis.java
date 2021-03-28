@@ -125,14 +125,20 @@ Drawable drawable=view.getBackground();
                 @Override
                 public void onClick(View textView) {
                     // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                    if (a.isEmpty("1")){
+
+                    }
+                    else {
+
+
                     Toast.makeText(dis.this,"aya: "+ (finalI+1), Toast.LENGTH_SHORT).show();
                     System.out.println(ayaID.get(finalI));
                     Builder builder = new Builder(dis.this);
 
-                    builder.setTitle("Confirm");
-                    builder.setMessage("Are you sure?");
+                    builder.setTitle("إنهاء الورد اليومي");
+                    builder.setMessage("هل تريد التوقف عند هذه الآية");
 
-                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
                             // Do nothing but close the dialog
@@ -187,7 +193,7 @@ Drawable drawable=view.getBackground();
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -200,6 +206,7 @@ Drawable drawable=view.getBackground();
                     alert.show();
 
                 }
+                }
                 @Override
                 public void updateDrawState(TextPaint ds) {
                     super.updateDrawState(ds);
@@ -207,6 +214,7 @@ Drawable drawable=view.getBackground();
                     ds.setUnderlineText(false);
                 }
             };
+
         }
 
 

@@ -48,6 +48,7 @@
         android:gravity="center_horizontal"
         android:scrollbars="vertical"
         android:text="بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"
+        android:fontFamily="@font/utf"
         android:textColor="@color/black"
         android:textSize="28sp" />
 
