@@ -37,7 +37,7 @@ Boolean sw=false;
         setContentView(R.layout.activity_settings);
         Context c=this;
         BottomNavigationView bottomNavigationView=findViewById(R.id.bot);
-        bottomNavigationView.setSelectedItemId(R.id.das);
+        bottomNavigationView.setSelectedItemId(R.id.about);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

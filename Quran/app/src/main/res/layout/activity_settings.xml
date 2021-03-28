@@ -7,6 +7,8 @@
 
 
     android:background="@drawable/irb"
+    android:backgroundTint="#80FFFFFF"
+    android:backgroundTintMode="src_over"
     tools:context=".Settings">
 
 

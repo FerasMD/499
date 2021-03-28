@@ -2,9 +2,11 @@ package kau.edu.quran;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -25,15 +27,31 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import static androidx.appcompat.app.AlertDialog.*;
+
 public class dis extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dis);
         View view=(View)findViewById(R.id.myV);
+        DB a = new DB (this);
 
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         Switch aSwitch=(Switch) findViewById(R.id.switch1);
@@ -54,8 +72,10 @@ if (back.equalsIgnoreCase("black")){
 
         textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
+        ArrayList<String> ayaID= (ArrayList<String>) getIntent().getSerializableExtra("id");
         String sname=getIntent().getStringExtra("sname");
         ActionBar actionBar=   getSupportActionBar();
+
         actionBar.hide();
 
         textView1.setText(sname);
@@ -106,11 +126,85 @@ Drawable drawable=view.getBackground();
                 public void onClick(View textView) {
                     // startActivity(new Intent(MyActivity.this, NextActivity.class));
                     Toast.makeText(dis.this,"aya: "+ (finalI+1), Toast.LENGTH_SHORT).show();
+                    System.out.println(ayaID.get(finalI));
+                    Builder builder = new Builder(dis.this);
+
+                    builder.setTitle("Confirm");
+                    builder.setMessage("Are you sure?");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing but close the dialog
+
+                            InputStream is = null;
+                            try {
+                                is = getAssets().open("hafs_v14.xml");
+                                // System.out.println();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+//an instance of factory that gives a document builder
+                            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//an instance of builder to parse the specified xml file
+                            DocumentBuilder db = null;
+                            try {
+                                db = dbf.newDocumentBuilder();
+                            } catch (ParserConfigurationException e) {
+                                e.printStackTrace();
+                            }
+                            Document doc = null;
+                            try {
+                                doc = db.parse(is);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (SAXException e) {
+                                e.printStackTrace();
+                            }
+                            doc.getDocumentElement().normalize();
+                            NodeList nodeList = doc.getElementsByTagName("ROW");
+                            for (int itr = 0; itr < nodeList.getLength(); itr++)
+                            {
+                                Node node = nodeList.item(itr);
+//System.out.println("\nNode Name :" + node.getNodeName());
+
+                                if (node.getNodeType() == Node.ELEMENT_NODE)
+                                {
+                                    Element eElement = (Element) node;
+                                    int num=Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+                                    if (num==Integer.parseInt(ayaID.get(finalI))) {
+                                        String updatedSourah =eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
+                                        int updatedVerse =Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent());
+                                        int updatedPage =Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
+                                        System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+                                        ArrayList<Object>attr=a.getAllAttr();
+                                        a.update("1",(int)attr.get(1),(String)attr.get(3),updatedSourah,updatedVerse,updatedPage);
+                                        //a.update("1",dailyPages,newEndDate,currentSourah,currentVerse,currentPage);
+                                    }
+
+                                }
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
                 }
                 @Override
                 public void updateDrawState(TextPaint ds) {
                     super.updateDrawState(ds);
-                    ds.setUnderlineText(true);
+
+                    ds.setUnderlineText(false);
                 }
             };
         }
@@ -134,16 +228,32 @@ Drawable drawable=view.getBackground();
 for (int i=0;i<ss.length;i++){
     //System.out.println("ss len"+i);
   //  System.out.println("ss i:"+ss[i]);
-    try {
-        ss[i].setSpan(clickableSpan[i], ss[i].length()-3, ss[i].length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }catch (Exception e ){
-        ss[i].setSpan(clickableSpan[i], ss[i].length()-2, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
 
+    if (i<9){
+        ss[i].setSpan(clickableSpan[i], ss[i].length()-3, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+    else{
+
+
+    try {
+
+        ss[i].setSpan(clickableSpan[i], ss[i].length()-4, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }catch (Exception e ){
+        ss[i].setSpan(clickableSpan[i], ss[i].length()-4, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+    }
+    System.out.println("ss lengthhhhhhhhhhhhh"+ss.length);
     textView.append(ss[i]);
+    //textView.append(ayaID.get(i-3));
+    //System.out.println(ayaID.get(i-3));
+
 
 }
-
+        for(int i=0;ayaID.size()>i;i++){
+            System.out.println(ayaID.get(i));
+        }
+        //System.out.println(ss.length);
+        //System.out.println(ayaID.size());
 
 
 

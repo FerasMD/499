@@ -46,7 +46,7 @@ private TextView txt;
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bot);
-        bottomNavigationView.setSelectedItemId(R.id.das);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -161,6 +161,7 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         String aya="";
         int ii=0;
         ArrayList<String>ayas=new ArrayList<>();
+        ArrayList<String>ayaID=new ArrayList<>();
         String sname="";
         for (int itr = 0; itr < nodeList.getLength(); itr++)
         {
@@ -172,13 +173,30 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 Element eElement = (Element) node;
 
                 if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
+                    String q="";
+                    if (Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent())>9){
+                        String a=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+
+                        String c=a.substring(a.length()-3,a.length());
+                        StringBuilder b =new StringBuilder();
+
+                        b.append(c);
+
+                         q=a.substring(0,a.length()-3)+""+b.reverse().toString();
+                    }else {
+                        q=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+                    }
+
                     ii++;
+                    int nummm=0;
 sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
                   //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
-                    ayas.add(eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ");
+
+                    ayas.add(q+" ");
+                    ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
                   //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                     //System.out.println(aya);
-
+                    nummm++;
                 }
 
             }
@@ -188,6 +206,7 @@ sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
         Intent intent=new Intent(getApplicationContext(),dis.class);
         intent.putExtra("aya",ayas);
         intent.putExtra("sname",sname);
+        intent.putExtra("id",ayaID);
 
         startActivity(intent);
 

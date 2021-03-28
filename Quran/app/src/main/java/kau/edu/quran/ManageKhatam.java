@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -13,6 +14,8 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,7 +44,30 @@ public class ManageKhatam extends AppCompatActivity {
         setContentView(R.layout.activity_manage_khatam);
         CalendarView calendarView=findViewById(R.id.calendarView);
         NumberPicker numberPicker= (NumberPicker) findViewById(R.id.num);
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bot);
+        bottomNavigationView.setSelectedItemId(R.id.das);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.das:
+
+
+                        return true;
+                    case R.id.about:
+                        startActivity(new Intent(getApplicationContext(),Settings.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
         DB db = new DB (this);
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -177,7 +203,7 @@ public class ManageKhatam extends AppCompatActivity {
             public void onClick(View view) {
                 int num=  db.delete("1");
                 System.out.println(num);
-
+                startActivity(new Intent(getApplicationContext(), Khatam.class));
 
             }
         });
@@ -223,6 +249,7 @@ public class ManageKhatam extends AppCompatActivity {
 
                 ArrayList<String> strings =new ArrayList<>();
                 ArrayList<String>ayas=new ArrayList<>();
+                ArrayList<String>ayaID=new ArrayList<>();
                 String sname="";
                 for (int itr = 0; itr < nodeList.getLength(); itr++)
                 {
@@ -234,7 +261,7 @@ public class ManageKhatam extends AppCompatActivity {
                         Element eElement = (Element) node;
                         int num=Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
                         if (num<=pages) {
-
+                            ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
                           /*  ArrayList<String>strings=new ArrayList<>();
                             if (!strings.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())){
                                 strings.add(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
@@ -276,6 +303,7 @@ public class ManageKhatam extends AppCompatActivity {
                 intent.putExtra("aya",ayas);
                 System.out.println(sname);
                 intent.putExtra("sname",sname);
+                intent.putExtra("id",ayaID);
                 startActivity(intent);
 
 

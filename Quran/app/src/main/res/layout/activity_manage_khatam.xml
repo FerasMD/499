@@ -5,8 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/irb"
-
+    android:backgroundTint="#80FFFFFF"
     android:backgroundTintMode="src_over"
+
+
     tools:context=".ManageKhatam">
 
     <ScrollView
@@ -168,5 +170,15 @@ android:background="@color/red"
 
     </ScrollView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bot"
+
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/menu_nav"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"/>
 
 </FrameLayout>

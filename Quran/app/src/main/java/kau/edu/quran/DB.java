@@ -86,7 +86,7 @@ public class DB extends SQLiteOpenHelper {
         return attrs;
     }
 
-    public boolean update (String id, int endDate, String dailyPages, String currentSourah, int currentVerse,
+    public boolean update (String id, int dailyPages,String endDate , String currentSourah, int currentVerse,
                            int currentPage){
 
         SQLiteDatabase db = this.getWritableDatabase();

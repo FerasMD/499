@@ -37,10 +37,10 @@ public class Khatam extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         createNotificationChannel();
         DB db = new DB (this);
-      /*  if (!db.isEmpty("khatm")){
+       if (!db.isEmpty("khatm")){
       Intent intent=new Intent(getApplicationContext(),ManageKhatam.class);
       startActivity(intent);
-        }*/
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
 
@@ -132,7 +132,7 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
     b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            db.delete("1");
+
             Switch aSwitch=findViewById(R.id.switch2);
             if (aSwitch.isChecked()) {
                 TimePicker timePicker=findViewById(R.id.timePicker1);
@@ -186,11 +186,12 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
                 String endDate = dateFormat.format(cal.getTime());
                 cal.setTime(date);
                 System.out.println(cal.getTime());
-                boolean d = db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
+                db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
                 ArrayList<Object> attrs = db.getAllAttr();
                 System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
                         +" "+attrs.get(5)+" "+attrs.get(6));
                 Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),ManageKhatam.class));
                 /*ArrayList<Object> attrs = db.getAllAttr();
                 System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
                         +" "+attrs.get(5)+" "+attrs.get(6));*/
