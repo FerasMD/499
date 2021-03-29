@@ -1,17 +1,23 @@
 package kau.edu.quran;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -28,6 +34,8 @@ import com.travijuu.numberpicker.library.NumberPicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Text;
+
+import java.net.URLEncoder;
 
 public class Settings extends AppCompatActivity {
 Boolean sw=false;
@@ -79,7 +87,37 @@ textView.setMovementMethod(new ScrollingMovementMethod());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),FeedBack.class));
+                String[] colors = {"Whatsapp", "Email"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+                builder.setTitle("Pick a platform to send your feedback");
+                builder.setItems(colors, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // the user clicked on colors[which]
+                        if (which==0){
+                            //try {
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_VIEW);
+                                String url = "https://api.whatsapp.com/send?phone=" + "+966558111297" + "&text=" + "";
+                                sendIntent.setData(Uri.parse(url));
+                                startActivity(sendIntent);
+                     //       }catch (Exception ){
+
+                           // }
+
+
+                        }else{
+                            startActivity(new Intent(getApplicationContext(),FeedBack.class));
+                        }
+
+
+                    }
+                });
+                builder.show();
+
+
+
             }
         });
         Button bt4=findViewById(R.id.button4);
