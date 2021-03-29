@@ -282,5 +282,13 @@ for (int i=0;i<ss.length;i++){
                 textView.setTextSize(0, textView.getTextSize() - 8.0f);
             }
         });
+    } @Override
+    public void onBackPressed() {
+
+
+        Intent i=new Intent(dis.this,MainActivity.class);
+
+        startActivity(i);
+        finish();
     }
 }

@@ -41,6 +41,8 @@ public class ManageKhatam extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_manage_khatam);
         CalendarView calendarView=findViewById(R.id.calendarView);
         NumberPicker numberPicker= (NumberPicker) findViewById(R.id.num);
@@ -87,7 +89,7 @@ public class ManageKhatam extends AppCompatActivity {
         t1.setText("السورة الحالية: "+attrs.get(4));
         t2.setText(t2.getText()+" "+attrs.get(6));
         t3.setText(t3.getText()+" "+attrs.get(5));
-        t4.setText(t4.getText()+" "+attrs.get(1));
+        t4.setText(t4.getText()+" "+attrs.get(1)+" صفحة");
         t5.setText(t5.getText()+" "+attrs.get(3));
 
         numberPicker.setValue((Integer) attrs.get(1));
@@ -215,6 +217,106 @@ public class ManageKhatam extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                InputStream is = null;
+                try {
+                    is = getAssets().open("hafs_v14.xml");
+                    // System.out.println();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+//an instance of factory that gives a document builder
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//an instance of builder to parse the specified xml file
+                DocumentBuilder db = null;
+                try {
+                    db = dbf.newDocumentBuilder();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+                Document doc = null;
+                try {
+                    doc = db.parse(is);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                }
+                doc.getDocumentElement().normalize();
+                // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+
+                NodeList nodeList = doc.getElementsByTagName("ROW");
+                // System.out.println(nodeList.getLength());
+// nodeList is not iterable, so we are using for loop
+                int ii=0;
+                ArrayList<String>ayas=new ArrayList<>();
+                ArrayList<String>ayaID=new ArrayList<>();
+                String sname="";
+                ArrayList<String> names=new ArrayList<>();
+                for (int itr = 0; itr < nodeList.getLength(); itr++)
+                {
+                    Node node = nodeList.item(itr);
+//System.out.println("\nNode Name :" + node.getNodeName());
+
+                    if (node.getNodeType() == Node.ELEMENT_NODE)
+                    {
+                        //Element eElement = (Element) node;
+                      //  if (!eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(attrs.get(4).toString())) {
+                        Element eElement = (Element) node;
+
+                        if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(attrs.get(4).toString())) {
+                            System.out.println("weogiuiuiuiuiuiuiuiuiuiuiuiuiuiupwoghwegwegwegwegwegwe");
+                            String q="";
+                            if (Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent())>9){
+                                String a=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+
+                                String c=a.substring(a.length()-3,a.length());
+                                StringBuilder b =new StringBuilder();
+
+                                b.append(c);
+
+                                q=a.substring(0,a.length()-3)+""+b.reverse().toString();
+                            }else {
+                                q=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+                            }
+
+                            
+                            ii++;
+                            int nummm=0;
+                            sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
+                            //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+
+                            ayas.add(q+" ");
+                            ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
+                            //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
+                            //System.out.println(aya);
+                            nummm++;
+                        }
+                    }
+
+                }
+
+
+
+
+
+                Intent intent=new Intent(getApplicationContext(),dis.class);
+                intent.putExtra("aya",ayas);
+                intent.putExtra("sname",sname);
+                intent.putExtra("id",ayaID);
+
+                startActivity(intent);
+
+
+            }
+        });
+
+
+
+/*
+      button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
              int pages=  Integer.parseInt(attrs.get(1).toString());
 
                 System.out.println(pages);
@@ -262,14 +364,14 @@ public class ManageKhatam extends AppCompatActivity {
                         int num=Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
                         if (num<=pages) {
                             ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
-                          /*  ArrayList<String>strings=new ArrayList<>();
+                            ArrayList<String>strings=new ArrayList<>();
                             if (!strings.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())){
                                 strings.add(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
 
                             }*
 
 
-                           */
+
                             String sssss=eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
 
                             if (!strings.contains(sssss)){
@@ -323,12 +425,13 @@ public class ManageKhatam extends AppCompatActivity {
         });
 
 
-
+*/
 
 
 
 
     }
+
     public static long getDateDiff(SimpleDateFormat format, String oldDate, String newDate) {
         try {
             return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - format.parse(oldDate).getTime(), TimeUnit.MILLISECONDS);

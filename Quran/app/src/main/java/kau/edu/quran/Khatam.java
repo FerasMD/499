@@ -155,7 +155,7 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
                 long daysDiff = getDateDiff(dateFormat, startDate, endDate);
                 if (daysDiff > 0) {
                     int dailyPages = (int) ((int) 604 / daysDiff);
-                    db.insertInto1(1, dailyPages, startDate, endDate, "الفاتحة", 1, 1);
+                    db.insertInto1(1, dailyPages, startDate, endDate, "الفَاتِحة ", 1, 1);
                     Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
                     ArrayList<Object> attrs = db.getAllAttr();
                     System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
