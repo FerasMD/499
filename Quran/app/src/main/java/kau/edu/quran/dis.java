@@ -74,6 +74,22 @@ if (back.equalsIgnoreCase("black")){
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
         ArrayList<String> ayaID= (ArrayList<String>) getIntent().getSerializableExtra("id");
         String sname=getIntent().getStringExtra("sname");
+        String curA;
+        try {
+            curA= getIntent().getStringExtra("curA");
+            TextView tcurA=findViewById(R.id.curA);
+            if (!curA.equalsIgnoreCase("")){
+
+                tcurA.setText("الآية الحالية: "+curA);
+                tcurA.setVisibility(View.VISIBLE);
+            }
+
+        }catch (NullPointerException e){
+
+
+        }
+
+
         ActionBar actionBar=   getSupportActionBar();
 
         actionBar.hide();

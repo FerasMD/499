@@ -279,7 +279,7 @@ public class ManageKhatam extends AppCompatActivity {
                                 q=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
                             }
 
-                            
+
                             ii++;
                             int nummm=0;
                             sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
@@ -303,7 +303,7 @@ public class ManageKhatam extends AppCompatActivity {
                 intent.putExtra("aya",ayas);
                 intent.putExtra("sname",sname);
                 intent.putExtra("id",ayaID);
-
+                intent.putExtra("curA",attrs.get(5).toString());
                 startActivity(intent);
 
 
