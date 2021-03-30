@@ -79,32 +79,17 @@ private TextView txt;
         });
        // txt=(TextView)findViewById(R.id.txt);
 
-        InputStream is = null;
-        try {
-            is = getAssets().open("hafs_v14.xml");
-            // System.out.println();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//an instance of factory that gives a document builder
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
-        DocumentBuilder db = null;
-        try {
-            db = dbf.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document doc = null;
-        try {
-            doc = db.parse(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-        doc.getDocumentElement().normalize();
-        NodeList nodeList = doc.getElementsByTagName("ROW");
+        Sourah sourah=new Sourah();
+      NodeList nodeList=  sourah.retriving_file(this);
+
+
+
+
+
+
+
+
+
         /*
         // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
@@ -207,6 +192,7 @@ sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
         intent.putExtra("aya",ayas);
         intent.putExtra("sname",sname);
         intent.putExtra("id",ayaID);
+       // intent.putExtra("c","main");
 
         startActivity(intent);
 

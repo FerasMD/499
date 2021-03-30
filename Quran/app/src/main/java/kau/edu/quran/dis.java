@@ -74,10 +74,54 @@ if (back.equalsIgnoreCase("black")){
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
         ArrayList<String> ayaID= (ArrayList<String>) getIntent().getSerializableExtra("id");
         String sname=getIntent().getStringExtra("sname");
+
         String curA;
         try {
             curA= getIntent().getStringExtra("curA");
             TextView tcurA=findViewById(R.id.curA);
+            TextView la=findViewById(R.id.la);
+            ArrayList<Object> attrs = a.getAllAttr();
+            int dpage=Integer.parseInt(attrs.get(1).toString());
+            int cpage=Integer.parseInt(attrs.get(6).toString());
+            int lastpage=dpage+cpage;
+            if (lastpage<=604){
+                Sourah sourah=new Sourah();
+                NodeList nodeList=sourah.retriving_file(dis.this);
+
+
+
+                for (int itr = 0; itr < nodeList.getLength(); itr++)
+                {
+                    Node node = nodeList.item(itr);
+//System.out.println("\nNode Name :" + node.getNodeName());
+
+                    if (node.getNodeType() == Node.ELEMENT_NODE)
+                    {
+                        Element eElement = (Element) node;
+                        int num=Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
+                        if (lastpage==num) {
+
+                            String sur=eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
+
+                            String lay=eElement.getElementsByTagName("aya_no").item(0).getTextContent();
+                            la.setVisibility(View.VISIBLE);
+                            la.setText("ينتهي وردك اليومي عند: "+sur+"و"+lay);
+                            break;
+
+
+                        }
+
+                    }
+                }
+
+
+
+
+
+            }
+
+
+
             if (!curA.equalsIgnoreCase("")){
 
                 tcurA.setText("الآية الحالية: "+curA);
@@ -159,6 +203,12 @@ Drawable drawable=view.getBackground();
                         public void onClick(DialogInterface dialog, int which) {
                             // Do nothing but close the dialog
 
+
+                            Sourah sourah=new Sourah();
+                           NodeList nodeList =sourah.retriving_file(dis.this);
+
+
+/*
                             InputStream is = null;
                             try {
                                 is = getAssets().open("hafs_v14.xml");
@@ -184,7 +234,10 @@ Drawable drawable=view.getBackground();
                                 e.printStackTrace();
                             }
                             doc.getDocumentElement().normalize();
+
+
                             NodeList nodeList = doc.getElementsByTagName("ROW");
+                            */
                             for (int itr = 0; itr < nodeList.getLength(); itr++)
                             {
                                 Node node = nodeList.item(itr);
@@ -301,10 +354,12 @@ for (int i=0;i<ss.length;i++){
     } @Override
     public void onBackPressed() {
 
+    Intent i=new Intent(dis.this,MainActivity.class);
 
-        Intent i=new Intent(dis.this,MainActivity.class);
+    startActivity(i);
+    finish();
 
-        startActivity(i);
-        finish();
+
+
     }
 }

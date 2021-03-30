@@ -186,7 +186,7 @@ radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListen
                 String endDate = dateFormat.format(cal.getTime());
                 cal.setTime(date);
                 System.out.println(cal.getTime());
-                db.insertInto1(1,dailyPages,startDate,endDate,"الفاتحة", 1,1);
+                db.insertInto1(1,dailyPages,startDate,endDate,"الفَاتِحة ", 1,1);
                 ArrayList<Object> attrs = db.getAllAttr();
                 System.out.println(attrs.get(0)+" "+attrs.get(1)+" "+attrs.get(2)+" "+attrs.get(3)+" "+attrs.get(4)
                         +" "+attrs.get(5)+" "+attrs.get(6));

@@ -216,7 +216,12 @@ public class ManageKhatam extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+Sourah sourah=new Sourah();
+NodeList nodeList=sourah.retriving_file(ManageKhatam.this);
 
+
+
+                /*
                 InputStream is = null;
                 try {
                     is = getAssets().open("hafs_v14.xml");
@@ -245,6 +250,8 @@ public class ManageKhatam extends AppCompatActivity {
                 // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
                 NodeList nodeList = doc.getElementsByTagName("ROW");
+                */
+
                 // System.out.println(nodeList.getLength());
 // nodeList is not iterable, so we are using for loop
                 int ii=0;
@@ -304,6 +311,7 @@ public class ManageKhatam extends AppCompatActivity {
                 intent.putExtra("sname",sname);
                 intent.putExtra("id",ayaID);
                 intent.putExtra("curA",attrs.get(5).toString());
+               // intent.putExtra("c","man");
                 startActivity(intent);
 
 
