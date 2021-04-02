@@ -42,6 +42,7 @@ Boolean sw=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_settings);
         Context c=this;
         BottomNavigationView bottomNavigationView=findViewById(R.id.bot);

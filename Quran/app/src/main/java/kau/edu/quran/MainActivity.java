@@ -142,7 +142,7 @@ ArrayList<String> names=   user.Select_Sourah(nodeList);
 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
+       /* Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
         String aya="";
         int ii=0;
         ArrayList<String>ayas=new ArrayList<>();
@@ -195,7 +195,9 @@ sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
        // intent.putExtra("c","main");
 
         startActivity(intent);
+*/
 
+        startActivity(sourah.getSourah(nodeList, names.get(i),getApplicationContext(),new String(""))) ;
     }
 });
         //  txt.setText(builder.toString());

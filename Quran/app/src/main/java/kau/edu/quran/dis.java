@@ -33,6 +33,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.DataOutput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -56,7 +57,8 @@ public class dis extends AppCompatActivity {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         Switch aSwitch=(Switch) findViewById(R.id.switch1);
         String back=sharedPreferences.getString("back","No");
-
+        TextView tcurA=findViewById(R.id.curA);
+        TextView la=findViewById(R.id.la);
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView1=(TextView)findViewById(R.id.textView6);
 if (back.equalsIgnoreCase("black")){
@@ -64,10 +66,12 @@ if (back.equalsIgnoreCase("black")){
     view.setBackgroundColor(Color.BLACK);
     textView.setTextColor(Color.WHITE);
     textView1.setTextColor(Color.WHITE);
+    la.setTextColor(Color.WHITE);
+    tcurA.setTextColor(Color.WHITE);
 }
         int size=Integer.parseInt(sharedPreferences.getString("size","28"));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
-        System.out.println(size+"   "+back);
+      //  System.out.println(size+"   "+back);
      //   ActionBar actionBar=(ActionBar)findViewById()
 
         textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
@@ -78,8 +82,7 @@ if (back.equalsIgnoreCase("black")){
         String curA;
         try {
             curA= getIntent().getStringExtra("curA");
-            TextView tcurA=findViewById(R.id.curA);
-            TextView la=findViewById(R.id.la);
+
             ArrayList<Object> attrs = a.getAllAttr();
             int dpage=Integer.parseInt(attrs.get(1).toString());
             int cpage=Integer.parseInt(attrs.get(6).toString());
@@ -104,7 +107,7 @@ if (back.equalsIgnoreCase("black")){
                             String sur=eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
 
                             String lay=eElement.getElementsByTagName("aya_no").item(0).getTextContent();
-                            la.setVisibility(View.VISIBLE);
+
                             la.setText("ينتهي وردك اليومي عند: "+sur+"و"+lay);
                             break;
 
@@ -126,10 +129,15 @@ if (back.equalsIgnoreCase("black")){
 
                 tcurA.setText("الآية الحالية: "+curA);
                 tcurA.setVisibility(View.VISIBLE);
+                la.setVisibility(View.VISIBLE);
+
             }
+
 
         }catch (NullPointerException e){
 
+
+        }catch (IndexOutOfBoundsException indexOutOfBoundsException){
 
         }
 
@@ -151,19 +159,20 @@ Drawable drawable=view.getBackground();
                     view.setBackgroundColor(Color.BLACK);
                     textView.setTextColor(Color.WHITE);
                     textView1.setTextColor(Color.WHITE);
+                    la.setTextColor(Color.WHITE);
+                    tcurA.setTextColor(Color.WHITE);
                 }else{
                     textView.setTextColor(Color.BLACK);
                     textView1.setTextColor(Color.BLACK);
+                    la.setTextColor(Color.BLACK);
+
+                    tcurA.setTextColor(Color.BLACK);
                     view.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
             }
         });
 
-        String ve="";
-        for (int i=0;i<aya.size();i++){
 
-            ve+=aya.get(i);
-        }
        /* TextView t=(TextView)findViewById(R.id.textView);
         System.out.println("actvity222222222222222222222");
 
@@ -189,10 +198,41 @@ Drawable drawable=view.getBackground();
 
                     }
                     else {
+                    /* if ((finalI+1)==clickableSpan.length){
+                         System.out.println("yes");
+                         Builder builder = new Builder(dis.this);
 
+                         builder.setTitle("الانتقال");
+                         builder.setMessage("هل تريد الانتقال الى السورة التالية");
+builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        DB db = new DB (getApplicationContext());
+        ArrayList<Object> attrs = db.getAllAttr();
+
+      nextSourah(textView1.getText().toString(),attrs.get(5).toString());
+        dialogInterface.dismiss();
+
+    }
+});
+                         builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
+
+                             @Override
+                             public void onClick(DialogInterface dialog, int which) {
+
+                                 // Do nothing
+                                 dialog.dismiss();
+                             }
+                         });
+                         AlertDialog alert = builder.create();
+                         alert.show();
+
+
+                     }
+*/
 
                     Toast.makeText(dis.this,"aya: "+ (finalI+1), Toast.LENGTH_SHORT).show();
-                    System.out.println(ayaID.get(finalI));
+                //    System.out.println(ayaID.get(finalI));
                     Builder builder = new Builder(dis.this);
 
                     builder.setTitle("إنهاء الورد اليومي");
@@ -251,7 +291,7 @@ Drawable drawable=view.getBackground();
                                         String updatedSourah =eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent();
                                         int updatedVerse =Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent());
                                         int updatedPage =Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
-                                        System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+                                      //  System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                                         ArrayList<Object>attr=a.getAllAttr();
                                         a.update("1",(int)attr.get(1),(String)attr.get(3),updatedSourah,updatedVerse,updatedPage);
                                         //a.update("1",dailyPages,newEndDate,currentSourah,currentVerse,currentPage);
@@ -319,16 +359,38 @@ for (int i=0;i<ss.length;i++){
         ss[i].setSpan(clickableSpan[i], ss[i].length()-4, ss[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
     }
-    System.out.println("ss lengthhhhhhhhhhhhh"+ss.length);
+   // System.out.println("ss lengthhhhhhhhhhhhh"+ss.length);
     textView.append(ss[i]);
     //textView.append(ayaID.get(i-3));
     //System.out.println(ayaID.get(i-3));
 
 
 }
-        for(int i=0;ayaID.size()>i;i++){
-            System.out.println(ayaID.get(i));
+Button button=findViewById(R.id.next);
+
+button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        TextView te=findViewById(R.id.curA);
+
+        if (!te.getText().toString().equalsIgnoreCase("")){
+            DB db = new DB (getApplicationContext());
+            ArrayList<Object> attrs = db.getAllAttr();
+
+            nextSourah(textView1.getText().toString(),attrs.get(5).toString());
+
+        }else
+
+            {
+
+            nextSourah(textView1.getText().toString(),"");
+
         }
+
+
+
+    }
+});
         //System.out.println(ss.length);
         //System.out.println(ayaID.size());
 
@@ -358,6 +420,92 @@ for (int i=0;i<ss.length;i++){
 
     startActivity(i);
     finish();
+
+
+
+    }
+
+    public void nextSourah(String SourahName,String att){
+Sourah sourah=new Sourah();
+
+NodeList nodeList=sourah.retriving_file(this);
+
+        int neW=0;
+        ArrayList<String> ayas=new ArrayList<>();
+        ArrayList<String>ayaID=new ArrayList<>();
+        String sname="";
+        ArrayList<String> names=new ArrayList<>();
+        for (int itr = 0; itr < nodeList.getLength(); itr++)
+        {
+            Node node = nodeList.item(itr);
+//System.out.println("\nNode Name :" + node.getNodeName());
+
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                //Element eElement = (Element) node;
+                //  if (!eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(attrs.get(4).toString())) {
+                Element eElement = (Element) node;
+
+                if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(SourahName)) {
+                    int page=Integer.parseInt(eElement.getElementsByTagName("sora_no").item(0).getTextContent());
+                     neW=page+1;
+                    System.out.println(neW);
+                }
+                    else if (Integer.parseInt(eElement.getElementsByTagName("sora_no").item(0).getTextContent())==neW){
+
+                        System.out.println(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
+
+
+
+                    String q="";
+                    if (Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent())>9){
+                        String a=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+
+                        String c=a.substring(a.length()-3,a.length());
+                        StringBuilder b =new StringBuilder();
+
+                        b.append(c);
+
+                        q=a.substring(0,a.length()-3)+""+b.reverse().toString();
+                    }else {
+                        q=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
+                    }
+
+
+
+                    int nummm=0;
+                    sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
+                    //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+
+                    ayas.add(q+" ");
+                    ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
+                    //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
+                    //System.out.println(aya);
+                    nummm++;
+                }
+
+            }
+
+        }
+
+
+
+
+
+        Intent intent=new Intent(getApplicationContext(),dis.class);
+        intent.putExtra("aya",ayas);
+        intent.putExtra("sname",sname);
+        intent.putExtra("id",ayaID);
+        if (!att.equalsIgnoreCase("")){
+            intent.putExtra("curA",att);
+            // intent.putExtra("c","man");
+            startActivity(intent);
+        }else{
+            startActivity(intent);
+
+        }
+
+
 
 
 

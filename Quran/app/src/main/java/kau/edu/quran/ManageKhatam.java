@@ -254,7 +254,7 @@ NodeList nodeList=sourah.retriving_file(ManageKhatam.this);
 
                 // System.out.println(nodeList.getLength());
 // nodeList is not iterable, so we are using for loop
-                int ii=0;
+              /*
                 ArrayList<String>ayas=new ArrayList<>();
                 ArrayList<String>ayaID=new ArrayList<>();
                 String sname="";
@@ -287,7 +287,7 @@ NodeList nodeList=sourah.retriving_file(ManageKhatam.this);
                             }
 
 
-                            ii++;
+
                             int nummm=0;
                             sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
                             //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
@@ -313,6 +313,17 @@ NodeList nodeList=sourah.retriving_file(ManageKhatam.this);
                 intent.putExtra("curA",attrs.get(5).toString());
                // intent.putExtra("c","man");
                 startActivity(intent);
+*/
+
+
+
+startActivity(  sourah.getSourah(nodeList,attrs.get(4).toString(),getApplicationContext(),attrs.get(5).toString()));
+
+
+
+
+
+
 
 
             }

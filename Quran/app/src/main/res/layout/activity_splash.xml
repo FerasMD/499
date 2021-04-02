@@ -26,8 +26,8 @@
 
     <TextView
         android:id="@+id/save"
-        android:layout_width="418dp"
-        android:layout_height="155dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:gravity="center_horizontal"
         android:text="اقرؤوا القرآن فإنه يأتي يوم القيامة شفيعاً لأصحابه"
