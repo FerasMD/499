@@ -36,7 +36,10 @@ import org.xml.sax.SAXException;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -54,13 +57,23 @@ public class dis extends AppCompatActivity {
         View view=(View)findViewById(R.id.myV);
         DB a = new DB (this);
 
+
+
+
+
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         Switch aSwitch=(Switch) findViewById(R.id.switch1);
         String back=sharedPreferences.getString("back","No");
         TextView tcurA=findViewById(R.id.curA);
         TextView la=findViewById(R.id.la);
+
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView1=(TextView)findViewById(R.id.textView6);
+
+
+
+
+
 if (back.equalsIgnoreCase("black")){
     aSwitch.setChecked(true);
     view.setBackgroundColor(Color.BLACK);
@@ -68,13 +81,14 @@ if (back.equalsIgnoreCase("black")){
     textView1.setTextColor(Color.WHITE);
     la.setTextColor(Color.WHITE);
     tcurA.setTextColor(Color.WHITE);
+    aSwitch.setTextColor(Color.WHITE);
 }
         int size=Integer.parseInt(sharedPreferences.getString("size","28"));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
       //  System.out.println(size+"   "+back);
      //   ActionBar actionBar=(ActionBar)findViewById()
 
-        textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
+
         ArrayList<String> aya= (ArrayList<String>) getIntent().getSerializableExtra("aya");
         ArrayList<String> ayaID= (ArrayList<String>) getIntent().getSerializableExtra("id");
         String sname=getIntent().getStringExtra("sname");
@@ -83,7 +97,10 @@ if (back.equalsIgnoreCase("black")){
         try {
             curA= getIntent().getStringExtra("curA");
 
+
             ArrayList<Object> attrs = a.getAllAttr();
+
+            String sourN=attrs.get(4).toString();
             int dpage=Integer.parseInt(attrs.get(1).toString());
             int cpage=Integer.parseInt(attrs.get(6).toString());
             int lastpage=dpage+cpage;
@@ -108,7 +125,7 @@ if (back.equalsIgnoreCase("black")){
 
                             String lay=eElement.getElementsByTagName("aya_no").item(0).getTextContent();
 
-                            la.setText("ينتهي وردك اليومي عند: "+sur+"و"+lay);
+                            la.setText("ينتهي وردك اليومي عند: "+sur+" أية: "+lay);
                             break;
 
 
@@ -127,7 +144,7 @@ if (back.equalsIgnoreCase("black")){
 
             if (!curA.equalsIgnoreCase("")){
 
-                tcurA.setText("الآية الحالية: "+curA);
+                tcurA.setText("الآية الحالية: "+sourN+"\n"+" أية: "+curA);
                 tcurA.setVisibility(View.VISIBLE);
                 la.setVisibility(View.VISIBLE);
 
@@ -147,6 +164,12 @@ if (back.equalsIgnoreCase("black")){
         actionBar.hide();
 
         textView1.setText(sname);
+
+        if(!textView1.getText().toString().equalsIgnoreCase("الفَاتِحة ")){
+
+            textView.setText("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيم \n");
+
+        }
        // ColorStateList col=textView.getTextColors();
 
 Drawable drawable=view.getBackground();
@@ -161,11 +184,12 @@ Drawable drawable=view.getBackground();
                     textView1.setTextColor(Color.WHITE);
                     la.setTextColor(Color.WHITE);
                     tcurA.setTextColor(Color.WHITE);
+                    aSwitch.setTextColor(Color.WHITE);
                 }else{
                     textView.setTextColor(Color.BLACK);
                     textView1.setTextColor(Color.BLACK);
                     la.setTextColor(Color.BLACK);
-
+                    aSwitch.setTextColor(Color.BLACK);
                     tcurA.setTextColor(Color.BLACK);
                     view.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
@@ -293,7 +317,16 @@ builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                                         int updatedPage =Integer.parseInt(eElement.getElementsByTagName("page").item(0).getTextContent());
                                       //  System.out.println(eElement.getElementsByTagName("aya_text").item(0).getTextContent());
                                         ArrayList<Object>attr=a.getAllAttr();
-                                        a.update("1",(int)attr.get(1),(String)attr.get(3),updatedSourah,updatedVerse,updatedPage);
+                                        int remainingPages = 604-updatedPage;
+                                        int daysToFinish = remainingPages/(int)attr.get(1);
+                                       // daysToFinish++;
+                                        Calendar cal = Calendar.getInstance();
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                        Date date=  cal.getTime();
+                                        cal.add(Calendar.DATE, daysToFinish);
+                                        String newEndDate = dateFormat.format(cal.getTime());
+                                        cal.setTime(date);
+                                        a.update("1",(int)attr.get(1),newEndDate,updatedSourah,updatedVerse,updatedPage);
                                         //a.update("1",dailyPages,newEndDate,currentSourah,currentVerse,currentPage);
                                     }
 

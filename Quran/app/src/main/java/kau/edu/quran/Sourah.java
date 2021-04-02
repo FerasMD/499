@@ -19,10 +19,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class Sourah {
-    public String sname,id,place,ver,wrd,let;
+    public String sname,id,place,ver,wrd,let,resN;
 
-    public String displayDetails(NodeList nodeList, String text){
-
+    public ArrayList<String> displayDetails(NodeList nodeList, String text){
+ArrayList<String> About=new ArrayList<>();
 
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
@@ -37,6 +37,7 @@ public class Sourah {
                     ver =eElement.getElementsByTagName("ayas").item(0).getTextContent()+" ";
                     wrd =eElement.getElementsByTagName("words").item(0).getTextContent()+" ";
                     let =eElement.getElementsByTagName("letters").item(0).getTextContent()+" ";
+                    resN=eElement.getElementsByTagName("reason_n").item(0).getTextContent()+" ";
                     //ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
                     //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
                     //System.out.println(aya);
@@ -45,7 +46,8 @@ public class Sourah {
             }
         }
 
-        String About="عدد الآيات:"+ver+"\n"+"عدد الكلمات:"+wrd+"\n"+"عدد الحروف:"+let+"\n"+"مكان النزول:"+place;
+         About.add("عدد الآيات:"+ver+"\n"+"عدد الكلمات:"+wrd+"\n"+"عدد الحروف:"+let+"\n"+"مكان النزول:"+place);
+        About.add(resN);
 
         return About; }
 

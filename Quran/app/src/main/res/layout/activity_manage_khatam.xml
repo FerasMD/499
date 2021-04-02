@@ -31,7 +31,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="189dp"
                 android:layout_marginTop="21dp"
-                android:text="السورة الحالية:" />
+                android:text="السورة الحالية:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/curSo2"
@@ -41,37 +43,46 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="184dp"
                 android:layout_marginTop="47dp"
-                android:text="الصفحة الحالية:" />
+                android:text="الصفحة الحالية:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/curSo3"
-                android:layout_width="120dp"
+                android:layout_width="226dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="274dp"
+                android:layout_marginStart="167dp"
                 android:layout_marginTop="74dp"
-                android:text="الآية الحالية:" />
+                android:text="الآية الحالية:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/curSo4"
-                android:layout_width="200dp"
+                android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="194dp"
+                android:layout_marginStart="105dp"
                 android:layout_marginTop="123dp"
-                android:text="تاريخ انهاء الختمة:" />
+                android:text="تاريخ انهاء الختمة:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/curSo5"
-                android:layout_width="200dp"
+                android:layout_width="306dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="204dp"
+                android:layout_marginStart="87dp"
                 android:layout_marginTop="100dp"
-                android:text="الورد اليومي" />
+                android:text="الورد اليومي"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
 
             <RadioGroup
                 android:id="@+id/rg"
@@ -82,6 +93,7 @@
                 android:layout_alignParentRight="false"
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="75dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="right">
 
@@ -121,7 +133,6 @@
 
             </RadioGroup>
 
-
             <Switch
                 android:id="@+id/switch2"
                 android:layout_width="wrap_content"
@@ -147,27 +158,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timePicker1"
-
-                android:layout_centerHorizontal="true"
-                android:text="Update"></Button>
+android:backgroundTint="#7868e6"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="7dp"
+                android:text="تحديث الختمة"></Button>
 
             <Button
                 android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/update"
-android:background="@color/red"
-                android:layout_centerHorizontal="true"
-                android:text="Delete"
-             ></Button>
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-51dp"
+                android:layout_marginEnd="74dp"
+
+                android:text="حذف الختمة"
+                app:backgroundTint="@color/red"></Button>
 
             <Button
                 android:id="@+id/read"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/delete"
-                android:layout_centerHorizontal="true"
-                android:text="Continue reading"></Button>
+                android:layout_below="@+id/curSo4"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="141dp"
+                android:text="أكمل الختمة"></Button>
+
         </RelativeLayout>
 
 

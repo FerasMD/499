@@ -114,11 +114,14 @@ public class list extends ArrayAdapter<String> {
 
                 Sourah s = new Sourah();
                 sname=(String)finalMainViewholder.title.getText();
-                String about=s.displayDetails(nodeList,sname);
 
+
+                ArrayList<String> arrayList=s.displayDetails(nodeList,sname);
+                       String about=arrayList.get(0);
+String res=arrayList.get(1);
                 Toast.makeText(getContext(), place, Toast.LENGTH_SHORT).show();
 
-               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",about));
+               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",about).putExtra("res",res));
             }
 
 
