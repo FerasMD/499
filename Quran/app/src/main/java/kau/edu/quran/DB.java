@@ -21,11 +21,6 @@ public class DB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-        /*sqLiteDatabase.execSQL("create table sourahInfo (sourahName varchar(10) PRIMARY KEY, reasonD varchar2(1000), " +
-                "reasonN varhcar2(1000), place varchar(10), noV integer, noL integer)");
-        sqLiteDatabase.execSQL("create table settings(id integer PRIMARY KEY)");
-         */
         sqLiteDatabase.execSQL("create table khatm (id integer PRIMARY KEY, dailyPages integer, startDate varchar(15)" +
                 ", endDate varchar(15), currentSourah varchar(10), currentVerse integer, currentPage integer)");
     }

@@ -26,7 +26,7 @@ ArrayList<String> About=new ArrayList<>();
 
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
-//System.out.println("\nNode Name :" + node.getNodeName());
+
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) node;
@@ -38,9 +38,7 @@ ArrayList<String> About=new ArrayList<>();
                     wrd =eElement.getElementsByTagName("words").item(0).getTextContent()+" ";
                     let =eElement.getElementsByTagName("letters").item(0).getTextContent()+" ";
                     resN=eElement.getElementsByTagName("reason_n").item(0).getTextContent()+" ";
-                    //ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
-                    //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
-                    //System.out.println(aya);
+
 
                 }
             }
@@ -62,9 +60,9 @@ ArrayList<String> About=new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
         }
-//an instance of factory that gives a document builder
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
+
         DocumentBuilder db = null;
         try {
             db = dbf.newDocumentBuilder();
@@ -104,8 +102,7 @@ ArrayList<String> About=new ArrayList<>();
 
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
-                //Element eElement = (Element) node;
-                //  if (!eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(attrs.get(4).toString())) {
+
                 Element eElement = (Element) node;
 
                 if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(SourahName)) {
@@ -128,12 +125,11 @@ ArrayList<String> About=new ArrayList<>();
 
                     int nummm=0;
                     sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                    //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
+
 
                     ayas.add(q+" ");
                     ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
-                    //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
-                    //System.out.println(aya);
+
                     nummm++;
                 }
             }
@@ -144,23 +140,17 @@ ArrayList<String> About=new ArrayList<>();
 
 
 
-        Intent intent=new Intent(context,dis.class);
+        Intent intent=new Intent(context, DisplaySourah.class);
         intent.putExtra("aya",ayas);
         intent.putExtra("sname",sname);
         intent.putExtra("id",ayaID);
         intent.putExtra("curA",s);
-        // intent.putExtra("c","man");
+
       return intent;
 
 
     }
 
 
-    public String sh(){
-
-
-        return "yes";
-
-    }
 
 }

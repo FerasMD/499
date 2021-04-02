@@ -16,12 +16,7 @@ public class FeedBack extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
 
-
-
-
-
-
-        to=findViewById(R.id.edit_to);
+      //  to=findViewById(R.id.edit_to);
         sub=findViewById(R.id.edit_sub);
         msg=findViewById(R.id.edit_msg);
 

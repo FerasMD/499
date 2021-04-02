@@ -17,12 +17,12 @@ public class Sourah_info extends AppCompatActivity {
         setContentView(R.layout.activity_sourah_info);
 
         ExpandableTextView expandableTextView= findViewById(R.id.ex);
-        //TabItem tabItem=(TabItem)findViewById(R.id.mon);
+
         expandableTextView.setText(getIntent().getStringExtra("about")+"                                                             ");
 
 
         ExpandableTextView expandableTextView1= findViewById(R.id.ex1);
-        //TabItem tabItem=(TabItem)findViewById(R.id.mon);
+
         expandableTextView1.setText("Copyright 2014 Manabu Shimobe\n" +
                 "\n" +
                 "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
@@ -39,7 +39,7 @@ public class Sourah_info extends AppCompatActivity {
 
 
         ExpandableTextView expandableTextView2= findViewById(R.id.ex2);
-        //TabItem tabItem=(TabItem)findViewById(R.id.mon);
+
         expandableTextView2.setText(getIntent().getStringExtra("res"));
 
 

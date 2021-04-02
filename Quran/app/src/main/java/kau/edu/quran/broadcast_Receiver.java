@@ -9,7 +9,7 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class bodRec extends BroadcastReceiver {
+public class broadcast_Receiver extends BroadcastReceiver {
 
 
     @Override

@@ -38,31 +38,29 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
-private TextView txt;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bot);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bot);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
 
                         return true;
                     case R.id.das:
 
-                        startActivity(new Intent(getApplicationContext(),Khatam.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), Khatam.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.about:
-                        startActivity(new Intent(getApplicationContext(),Settings.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), Settings.class));
+                        overridePendingTransition(0, 0);
                         return true;
 
                 }
@@ -70,137 +68,25 @@ private TextView txt;
             }
         });
 
-        Button button=findViewById(R.id.button3);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),trying.class));
-            }
-        });
-       // txt=(TextView)findViewById(R.id.txt);
-
-        Sourah sourah=new Sourah();
-      NodeList nodeList=  sourah.retriving_file(this);
 
 
+        Sourah sourah = new Sourah();
+        NodeList nodeList = sourah.retriving_file(this);
+
+        User user = new User();
+        ArrayList<String> names = user.Select_Sourah(nodeList);
 
 
-
-
-
-
-
-        /*
-        // System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-
-
-        // System.out.println(nodeList.getLength());
-
-
-        System.out.println("node list is+ "+nodeList.getLength());
-// nodeList is not iterable, so we are using for loop
-        ArrayList<String> names=new ArrayList<>();
-        for (int itr = 0; itr < nodeList.getLength(); itr++)
-        {
-
-
-            Node node = nodeList.item(itr);
-//System.out.println("\nNode Name :" + node.getNodeName());
-
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element eElement = (Element) node;
-
-
-
-                    if (!names.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())) {
-                        //System.out.println(names.size());
-                        names.add(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                    }
-
-                    // System.exit(0);
-
-
-//System.out.println("First Name: "+ eElement.getElementsByTagName("firstname").item(0).getTextContent());
-//System.out.println("Last Name: "+ eElement.getElementsByTagName("lastname").item(0).getTextContent());
-//System.out.println("Subject: "+ eElement.getElementsByTagName("subject").item(0).getTextContent());
-//System.out.println("Marks: "+ eElement.getElementsByTagName("marks").item(0).getTextContent());
-
-            }
-
-
-
-        }
-*/
-User user=new User();
-ArrayList<String> names=   user.Select_Sourah(nodeList);
-
-
-      final   ListView listView=(ListView)findViewById(R.id.listview) ;
+        final ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(new list(this, R.layout.list, names));
 
-listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-       /* Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
-        String aya="";
-        int ii=0;
-        ArrayList<String>ayas=new ArrayList<>();
-        ArrayList<String>ayaID=new ArrayList<>();
-        String sname="";
-        for (int itr = 0; itr < nodeList.getLength(); itr++)
-        {
-            Node node = nodeList.item(itr);
-//System.out.println("\nNode Name :" + node.getNodeName());
-
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element eElement = (Element) node;
-
-                if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase(names.get(i))) {
-                    String q="";
-                    if (Integer.parseInt(eElement.getElementsByTagName("aya_no").item(0).getTextContent())>9){
-                        String a=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
-
-                        String c=a.substring(a.length()-3,a.length());
-                        StringBuilder b =new StringBuilder();
-
-                        b.append(c);
-
-                         q=a.substring(0,a.length()-3)+""+b.reverse().toString();
-                    }else {
-                        q=eElement.getElementsByTagName("aya_text").item(0).getTextContent();
-                    }
-
-                    ii++;
-                    int nummm=0;
-sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                  //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
-
-                    ayas.add(q+" ");
-                    ayaID.add(eElement.getElementsByTagName("id").item(0).getTextContent());
-                  //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
-                    //System.out.println(aya);
-                    nummm++;
-                }
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(sourah.getSourah(nodeList, names.get(i), getApplicationContext(), new String("")));
             }
-        }
+        });
 
-        System.out.println(ii);
-        Intent intent=new Intent(getApplicationContext(),dis.class);
-        intent.putExtra("aya",ayas);
-        intent.putExtra("sname",sname);
-        intent.putExtra("id",ayaID);
-       // intent.putExtra("c","main");
-
-        startActivity(intent);
-*/
-
-        startActivity(sourah.getSourah(nodeList, names.get(i),getApplicationContext(),new String(""))) ;
-    }
-});
-        //  txt.setText(builder.toString());
     }
 
 }

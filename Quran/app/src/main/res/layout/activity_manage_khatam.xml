@@ -158,21 +158,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timePicker1"
-android:backgroundTint="#7868e6"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="46dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#7868e6"
                 android:text="تحديث الختمة"></Button>
 
             <Button
                 android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/update"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-51dp"
-                android:layout_marginEnd="74dp"
+                android:layout_alignParentBottom="true"
 
+                android:layout_marginEnd="52dp"
+                android:layout_marginBottom="154dp"
                 android:text="حذف الختمة"
                 app:backgroundTint="@color/red"></Button>
 

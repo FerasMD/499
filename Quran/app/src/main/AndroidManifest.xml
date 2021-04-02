@@ -13,8 +13,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".FeedBack" />
         <activity android:name=".Sourah_info" />
-        <activity android:name=".trying" />
-        <activity android:name=".dis" />
+        <activity android:name=".DisplaySourah" />
         <activity android:name=".Settings" />
         <activity android:name=".Khatam" />
         <activity android:name=".Splash">
@@ -24,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<receiver android:name=".bodRec"/>
+<receiver android:name=".broadcast_Receiver"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

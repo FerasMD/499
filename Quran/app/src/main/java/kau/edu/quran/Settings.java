@@ -103,10 +103,6 @@ textView.setMovementMethod(new ScrollingMovementMethod());
                                 String url = "https://api.whatsapp.com/send?phone=" + "+966558111297" + "&text=" + "";
                                 sendIntent.setData(Uri.parse(url));
                                 startActivity(sendIntent);
-                     //       }catch (Exception ){
-
-                           // }
-
 
                         }else{
                             startActivity(new Intent(getApplicationContext(),FeedBack.class));
@@ -141,7 +137,7 @@ textView.setMovementMethod(new ScrollingMovementMethod());
         });
 
 
-       // System.out.println(sharedPreferences.getString("back","NO"));
+
 
     }
 

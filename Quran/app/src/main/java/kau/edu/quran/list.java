@@ -31,17 +31,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class list extends ArrayAdapter<String> {
     private int layout;
-    private List<String> mObjects;
+
+
     public list(Context context, int resource, List<String> objects) {
         super(context, resource, objects);
-        mObjects = objects;
+
         layout = resource;
     }
+
     @SuppressLint("WrongViewCast")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder mainViewholder = null;
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(layout, parent, false);
             ViewHolder viewHolder = new ViewHolder();
@@ -56,9 +58,6 @@ public class list extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
 
-                String place="", ver="",wrd="",let="";
-
-               // Toast.makeText(getContext(), finalMainViewholder.title.getText(), Toast.LENGTH_SHORT).show();
 
                 InputStream is = null;
                 try {
@@ -82,46 +81,19 @@ public class list extends ArrayAdapter<String> {
                     e.printStackTrace();
                 }
                 NodeList nodeList = doc.getElementsByTagName("ROW");
-              //  ArrayList<String> ayas = new ArrayList<>();
+
                 String sname = "";
-                /*
-                for (int itr = 0; itr < nodeList.getLength(); itr++) {
-                    Node node = nodeList.item(itr);
-//System.out.println("\nNode Name :" + node.getNodeName());
-
-                    if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) node;
-                        if (eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent().equalsIgnoreCase((String) finalMainViewholder.title.getText())) {
-                            sname=(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent());
-                            //  System.out.println( eElement.getElementsByTagName("aya_text").item(0).getTextContent());
-                             place =eElement.getElementsByTagName("place").item(0).getTextContent()+" ";
-                            ver =eElement.getElementsByTagName("ayas").item(0).getTextContent()+" ";
-                            wrd =eElement.getElementsByTagName("words").item(0).getTextContent()+" ";
-                            let =eElement.getElementsByTagName("letters").item(0).getTextContent()+" ";
-                            //ayas.add(eElement.getElementsByTagName("place").item(0).getTextContent()+" ");
-                            //  aya+=eElement.getElementsByTagName("aya_text").item(0).getTextContent()+" ";
-                            //System.out.println(aya);
-
-                        }
-                    }
-                }
-
-
-
-                String About="عدد الآيات:"+ver+"\n"+"عدد الكلمات:"+wrd+"\n"+"عدد الحروف:"+let+"\n"+"مكان النزول:"+place;
-
-               */
 
                 Sourah s = new Sourah();
-                sname=(String)finalMainViewholder.title.getText();
+                sname = (String) finalMainViewholder.title.getText();
 
 
-                ArrayList<String> arrayList=s.displayDetails(nodeList,sname);
-                       String about=arrayList.get(0);
-String res=arrayList.get(1);
-                Toast.makeText(getContext(), place, Toast.LENGTH_SHORT).show();
+                ArrayList<String> arrayList = s.displayDetails(nodeList, sname);
+                String about = arrayList.get(0);
+                String res = arrayList.get(1);
 
-               getContext().startActivity(new Intent(getContext().getApplicationContext(),Sourah_info.class).putExtra("about",about).putExtra("res",res));
+
+                getContext().startActivity(new Intent(getContext().getApplicationContext(), Sourah_info.class).putExtra("about", about).putExtra("res", res));
             }
 
 
@@ -129,10 +101,10 @@ String res=arrayList.get(1);
         mainViewholder.title.setText(getItem(position));
 
 
-
         return convertView;
     }
 }
+
 class ViewHolder {
 
     TextView title;
