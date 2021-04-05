@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Khatam extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         createNotificationChannel();
@@ -145,40 +146,18 @@ public class Khatam extends AppCompatActivity {
 
                 if (db.isEmpty("khatm")) {
                     if (radioButton.isChecked()) {
-                        String startDate = dateFormat.format(cal.getTime());
-                        String endDate = sss[0];
-                        long daysDiff = getDateDiff(dateFormat, startDate, endDate);
-                        if (daysDiff > 0) {
-                            int dailyPages = (int) ((int) 604 / daysDiff);
-                            db.insertInto1(1, dailyPages, startDate, endDate, "الفَاتِحة ", 1, 1);
-                            Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
-                            ArrayList<Object> attrs = db.getAllAttr();
-                            System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
-                                    + " " + attrs.get(5) + " " + attrs.get(6));
-                            startActivity(new Intent(getApplicationContext(), ManageKhatam.class));
-                        } else {
-                            Toast.makeText(Khatam.this, "لا تستطيع اختيار نفس اليوم", Toast.LENGTH_SHORT).show();
-                        }
+                        createKhatamDays(dateFormat, cal, sss, db);
 
-
-                    } else {
-                        int dailyPages = numberPicker.getValue();
-                        String startDate = dateFormat.format(cal.getTime());
-                        int daysToFinish = 604 / dailyPages;
-                        Date date = cal.getTime();
-                        cal.add(Calendar.DATE, daysToFinish);
-
-                        String endDate = dateFormat.format(cal.getTime());
-                        cal.setTime(date);
-                        System.out.println(cal.getTime());
-                        db.insertInto1(1, dailyPages, startDate, endDate, "الفَاتِحة ", 1, 1);
-                        ArrayList<Object> attrs = db.getAllAttr();
-                        System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
-                                + " " + attrs.get(5) + " " + attrs.get(6));
-                        Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), ManageKhatam.class));
                     }
-                } else
+                    else {
+
+                        createKhatamPages(numberPicker.getValue(), dateFormat, cal, db);
+
+                    }
+
+                }
+                else
+
                     Toast.makeText(Khatam.this, "You have a schedule already.", Toast.LENGTH_SHORT).show();
 
 
@@ -221,6 +200,48 @@ public class Khatam extends AppCompatActivity {
         calendar.set(Calendar.MINUTE, minute);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
+
+    }
+
+    public void createKhatamDays(SimpleDateFormat dateFormat, Calendar cal, String[] sss, DB db) {
+
+
+        String startDate = dateFormat.format(cal.getTime());
+        String endDate = sss[0];
+        long daysDiff = getDateDiff(dateFormat, startDate, endDate);
+        if (daysDiff > 0) {
+            int dailyPages = (int) ((int) 604 / daysDiff);
+            db.insertInto1(1, dailyPages, startDate, endDate, "الفَاتِحة ", 1, 1);
+            Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
+            ArrayList<Object> attrs = db.getAllAttr();
+            System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
+                    + " " + attrs.get(5) + " " + attrs.get(6));
+            startActivity(new Intent(getApplicationContext(), ManageKhatam.class));
+        } else {
+            Toast.makeText(Khatam.this, "لا تستطيع اختيار نفس اليوم", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+    public void createKhatamPages(int numberPicker, SimpleDateFormat dateFormat, Calendar cal, DB db) {
+
+        int dailyPages = numberPicker;
+        String startDate = dateFormat.format(cal.getTime());
+        int daysToFinish = 604 / dailyPages;
+        Date date = cal.getTime();
+        cal.add(Calendar.DATE, daysToFinish);
+
+        String endDate = dateFormat.format(cal.getTime());
+        cal.setTime(date);
+        System.out.println(cal.getTime());
+        db.insertInto1(1, dailyPages, startDate, endDate, "الفَاتِحة ", 1, 1);
+        ArrayList<Object> attrs = db.getAllAttr();
+        System.out.println(attrs.get(0) + " " + attrs.get(1) + " " + attrs.get(2) + " " + attrs.get(3) + " " + attrs.get(4)
+                + " " + attrs.get(5) + " " + attrs.get(6));
+        Toast.makeText(Khatam.this, "Your schedule has been created", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), ManageKhatam.class));
 
     }
 

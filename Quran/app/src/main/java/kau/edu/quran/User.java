@@ -18,7 +18,7 @@ public ArrayList<String> Select_Sourah(NodeList nodeList){
         if (node.getNodeType() == Node.ELEMENT_NODE)
         {
             Element eElement = (Element) node;
-            if (!eElement.getElementsByTagName("id").item(0).getTextContent().equalsIgnoreCase("115")) {
+
 
 
                 if (!names.contains(eElement.getElementsByTagName("sora_name_ar").item(0).getTextContent())) {
@@ -27,7 +27,7 @@ public ArrayList<String> Select_Sourah(NodeList nodeList){
 
                 }
 
-            }
+
 
         }
 

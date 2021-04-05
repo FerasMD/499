@@ -15,6 +15,7 @@ public class DB extends SQLiteOpenHelper {
     public static final String DBName = "DB.db";
 
 
+
     public DB(@Nullable Context context) {
         super(context, DBName, null, 1);
     }

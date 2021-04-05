@@ -100,7 +100,7 @@ textView.setMovementMethod(new ScrollingMovementMethod());
                             //try {
                                 Intent sendIntent = new Intent();
                                 sendIntent.setAction(Intent.ACTION_VIEW);
-                                String url = "https://api.whatsapp.com/send?phone=" + "+966558111297" + "&text=" + "";
+                                String url = "https://api.whatsapp.com/send?phone=" + "++966570083865" + "&text=" + "";
                                 sendIntent.setData(Uri.parse(url));
                                 startActivity(sendIntent);
 

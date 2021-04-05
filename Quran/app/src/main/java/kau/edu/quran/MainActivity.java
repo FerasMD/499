@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         NodeList nodeList = sourah.retriving_file(this);
 
         User user = new User();
+
         ArrayList<String> names = user.Select_Sourah(nodeList);
 
 
