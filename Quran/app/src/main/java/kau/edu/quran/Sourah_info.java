@@ -21,7 +21,7 @@ public class Sourah_info extends AppCompatActivity {
         expandableTextView.setText(getIntent().getStringExtra("about")+"                                                             ");
 
 
-        ExpandableTextView expandableTextView1= findViewById(R.id.ex1);
+ /*       ExpandableTextView expandableTextView1= findViewById(R.id.ex1);
 
         expandableTextView1.setText("Copyright 2014 Manabu Shimobe\n" +
                 "\n" +
@@ -36,7 +36,7 @@ public class Sourah_info extends AppCompatActivity {
                 "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
                 "See the License for the specific language governing permissions and\n" +
                 "limitations under the License.");
-
+*/
 
         ExpandableTextView expandableTextView2= findViewById(R.id.ex2);
 

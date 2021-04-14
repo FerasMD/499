@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ex"
                 android:background="#E8E0E0"
-
+android:visibility="gone"
                 android:text="سبب النزول"
                 android:textColor="@color/black"
                 android:textSize="24dp"

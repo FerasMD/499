@@ -82,7 +82,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp"
-        android:text="Save" />
+        android:text="الحفظ" />
 
     <Button
 
@@ -95,7 +95,7 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="68dp"
-        android:text="Send your Feedback" />
+        android:text="إرسال الملاحظات" />
 
 
 </RelativeLayout>

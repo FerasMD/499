@@ -143,7 +143,6 @@ textView.setMovementMethod(new ScrollingMovementMethod());
 
 
    public void ChangeTheme(TextView textView,Switch aSwitch, SharedPreferences sharedPreferences){
-
        String back =sharedPreferences.getString("back","white");
        if (back.equalsIgnoreCase("black")){
 aSwitch.setChecked(true);
@@ -162,22 +161,12 @@ aSwitch.setChecked(true);
                    sw=false;
                    textView.setBackgroundResource(R.color.white);
                    textView.setTextColor(Color.BLACK);
-               }
-           }
-       });
-
-
-
-
-   }
+               } }}); }
 
 
     public void changeTextSize( TextView textView,NumberPicker numberPicker, SharedPreferences sharedPreferences){
         String Size=sharedPreferences.getString("size","28");
-
         int si=Integer.parseInt(Size);
-
-
         numberPicker.setMax(80);
         numberPicker.setMin(18);
         numberPicker.setUnit(2);
@@ -189,10 +178,4 @@ aSwitch.setChecked(true);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,value);
                 System.out.println(value);
             }
-        });
-
-
-    }
-
-
-}
+        }); }}
